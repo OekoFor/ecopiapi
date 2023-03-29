@@ -17,7 +17,7 @@ This function retrieves the value of an API key from the environment variables b
 }
 \examples{
 \dontrun{
-  # Retrieve the value of an API key named 'API_KEY'
-  api_key_value <- get_api_key("API_KEY")
+# Retrieve the value of an API key named 'API_KEY'
+api_key_value <- get_api_key("API_KEY")
 }
 }
