@@ -2,7 +2,7 @@ Package: ecopiapi
 Title: R package to interact with the ecopi API
 Version: 0.1.0
 Authors@R: 
-    person("Felix", "Felix", , "guenther@oekofor.de", role = c("aut", "cre"),
+    person("Felix Günther" , "guenther@oekofor.de", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Get, post, patch data from the ecop API.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
