@@ -16,8 +16,10 @@ A tibble containing the latest detections.
 Wrapper around the 'detections_read' endpoint to retrieve the latest detections.
 }
 \examples{
+\dontrun {
 # Get the latest 100 detections
 get_latest_detections()
+}
 
 # Get the latest 50 detections
 get_latest_detections(50)
