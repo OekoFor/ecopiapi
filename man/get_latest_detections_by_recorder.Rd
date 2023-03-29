@@ -19,8 +19,8 @@ Wrapper around the 'detections_recorder_read' endpoint to retrieve the latest de
 }
 \examples{
 # Get the latest 100 detections for a recorder named 'my_recorder'
-get_latest_detections_by_recorder(recorder_name = 'my_recorder')
+get_latest_detections_by_recorder(recorder_name = "my_recorder")
 
 # Get the latest 50 detections for a recorder named 'my_recorder'
-get_latest_detections_by_recorder(latest = 50, recorder_name = 'my_recorder')
+get_latest_detections_by_recorder(latest = 50, recorder_name = "my_recorder")
 }

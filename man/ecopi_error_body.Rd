@@ -17,7 +17,7 @@ Extract error message from JSON body of an HTTP response
 }
 \examples{
 \dontrun{
-  # Assuming an HTTP response object 'response' with a JSON error body
-  error_body <- ecopi_error_body(response)
+# Assuming an HTTP response object 'response' with a JSON error body
+error_body <- ecopi_error_body(response)
 }
 }

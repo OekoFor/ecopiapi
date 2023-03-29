@@ -25,8 +25,8 @@ Wrapper around the 'detections_recordergroup_read' endpoint to retrieve the late
 }
 \examples{
 # Get the latest 100 detections for the default recorder group in project 'my_project'
-get_latest_detections_by_recordergroup(project_name = 'my_project')
+get_latest_detections_by_recordergroup(project_name = "my_project")
 
 # Get the latest 50 detections for a recorder group named 'my_group' in project 'my_project'
-get_latest_detections_by_recordergroup(latest = 50, project_name = 'my_project', recordergroup_name = 'my_group')
+get_latest_detections_by_recordergroup(latest = 50, project_name = "my_project", recordergroup_name = "my_group")
 }

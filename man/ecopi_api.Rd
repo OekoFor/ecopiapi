@@ -21,9 +21,9 @@ This function sends an API request to the Ecopi API with the specified resource,
 }
 \examples{
 \dontrun{
-  # Send a request to the 'detections' endpoint. Only get detections in the project '017_neeri'
-  response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
+# Send a request to the 'detections' endpoint. Only get detections in the project '017_neeri'
+response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
 
-  #
+#
 }
 }

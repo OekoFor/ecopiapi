@@ -20,7 +20,7 @@ If the key value is not provided, the user will be prompted to enter it.
 }
 \examples{
 \dontrun{
-  # Set an API key with a name 'API_KEY' and a value 'your_api_key'
-  set_api_key(api_key_name = "API_KEY", api_key = "your_api_key")
+# Set an API key with a name 'API_KEY' and a value 'your_api_key'
+set_api_key(api_key_name = "API_KEY", api_key = "your_api_key")
 }
 }

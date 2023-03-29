@@ -24,5 +24,5 @@ get_latest_detections_by_project(project_name = 'my_project')
 }
 
 # Get the latest 50 detections for a project named 'my_project'
-get_latest_detections_by_project(latest = 50, project_name = 'my_project')
+get_latest_detections_by_project(latest = 50, project_name = "my_project")
 }
