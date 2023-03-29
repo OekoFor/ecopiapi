@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of ecopiapi is to …
+The goal of ecopiapi is to Get, post, patch data from the ecop API.
 
 ## Installation
 
