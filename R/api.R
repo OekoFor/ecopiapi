@@ -4,12 +4,14 @@
 #' @return A named character vector representing the flattened JSON content of the HTTP response body.
 #' @examples
 #' \dontrun{
-#'   # Assuming an HTTP response object 'response' with a JSON error body
-#'   error_body <- ecopi_error_body(response)
+#' # Assuming an HTTP response object 'response' with a JSON error body
+#' error_body <- ecopi_error_body(response)
 #' }
 #' @export
 ecopi_error_body <- function(resp) {
-  resp |> httr2::resp_body_json()  |>  unlist()
+  resp |>
+    httr2::resp_body_json() |>
+    unlist()
 }
 
 
@@ -23,10 +25,10 @@ ecopi_error_body <- function(resp) {
 #' @return A `response` object from the httr2 package containing the API response.
 #' @examples
 #' \dontrun{
-#'   # Send a request to the 'detections' endpoint. Only get detections in the project '017_neeri'
-#'   response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
+#' # Send a request to the 'detections' endpoint. Only get detections in the project '017_neeri'
+#' response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
 #'
-#'   #
+#' #
 #' }
 #' @import httr2
 #' @export
@@ -36,7 +38,7 @@ ecopi_api <- function(resource, ..., params = list()) {
     req_headers(Authorization = paste("Token", get_api_key())) |>
     req_user_agent("ecopiapi") |>
     req_error(body = ecopi_error_body) |>
-    req_template(resource, ...)  |>
+    req_template(resource, ...) |>
     req_url_query(!!!params) |>
     req_perform()
 }
@@ -119,10 +121,10 @@ get_latest_detections <- function(latest = 100) {
 #'
 #' @examples
 #' # Get the latest 100 detections for a project named 'my_project'
-#' get_latest_detections_by_project(project_name = 'my_project')
+#' get_latest_detections_by_project(project_name = "my_project")
 #'
 #' # Get the latest 50 detections for a project named 'my_project'
-#' get_latest_detections_by_project(latest = 50, project_name = 'my_project')
+#' get_latest_detections_by_project(latest = 50, project_name = "my_project")
 get_latest_detections_by_project <-
   function(latest = 100, project_name) {
     ecopi_api(
@@ -146,10 +148,10 @@ get_latest_detections_by_project <-
 #'
 #' @examples
 #' # Get the latest 100 detections for a recorder named 'my_recorder'
-#' get_latest_detections_by_recorder(recorder_name = 'my_recorder')
+#' get_latest_detections_by_recorder(recorder_name = "my_recorder")
 #'
 #' # Get the latest 50 detections for a recorder named 'my_recorder'
-#' get_latest_detections_by_recorder(latest = 50, recorder_name = 'my_recorder')
+#' get_latest_detections_by_recorder(latest = 50, recorder_name = "my_recorder")
 get_latest_detections_by_recorder <-
   function(latest = 100, recorder_name) {
     ecopi_api(
@@ -173,14 +175,14 @@ get_latest_detections_by_recorder <-
 #'
 #' @examples
 #' # Get the latest 100 detections for the default recorder group in project 'my_project'
-#' get_latest_detections_by_recordergroup(project_name = 'my_project')
+#' get_latest_detections_by_recordergroup(project_name = "my_project")
 #'
 #' # Get the latest 50 detections for a recorder group named 'my_group' in project 'my_project'
-#' get_latest_detections_by_recordergroup(latest = 50, project_name = 'my_project', recordergroup_name = 'my_group')
+#' get_latest_detections_by_recordergroup(latest = 50, project_name = "my_project", recordergroup_name = "my_group")
 get_latest_detections_by_recordergroup <-
   function(latest = 100,
            project_name,
-           recordergroup_name = 'default') {
+           recordergroup_name = "default") {
     ecopi_api(
       "GET /detections/latest{latest}/recordergroup/{project_name}/{recordergroup_name}/",
       latest = latest,
@@ -273,7 +275,7 @@ get_project_info <- function(project_name) {
     "GET /projects/{project_name}/",
     project_name = project_name
   ) |>
-  resp_body_json()
+    resp_body_json()
 }
 
 
