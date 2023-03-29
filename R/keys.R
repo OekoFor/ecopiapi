@@ -8,14 +8,15 @@
 #' @return NULL. The function sets the API key as an environment variable and does not return a value.
 #' @examples
 #' \dontrun{
-#'   # Set an API key with a name 'API_KEY' and a value 'your_api_key'
-#'   set_api_key(api_key_name = "API_KEY", api_key = "your_api_key")
+#' # Set an API key with a name 'API_KEY' and a value 'your_api_key'
+#' set_api_key(api_key_name = "API_KEY", api_key = "your_api_key")
 #' }
 #' @export
 set_api_key <- function(api_key_name = NULL,
                         api_key = NULL) {
-  if (is.null(api_key_name))
+  if (is.null(api_key_name)) {
     stop("Please provide a key name")
+  }
   if (is.null(api_key)) {
     api_key <- askpass::askpass("Please enter your API key")
   }
@@ -37,8 +38,8 @@ set_api_key <- function(api_key_name = NULL,
 #' @return A character string representing the value of the API key.
 #' @examples
 #' \dontrun{
-#'   # Retrieve the value of an API key named 'API_KEY'
-#'   api_key_value <- get_api_key("API_KEY")
+#' # Retrieve the value of an API key named 'API_KEY'
+#' api_key_value <- get_api_key("API_KEY")
 #' }
 #' @export
 get_api_key <- function(api_key_name = "API_KEY") {
