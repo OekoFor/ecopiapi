@@ -16,6 +16,8 @@ Data frame
 Convert response body to data frame
 }
 \examples{
-response <- ecopi_api("example", params = list(param1 = "value1"))
+\dontrun{
+response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
 resp_body_json_to_df(response)
+}
 }

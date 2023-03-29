@@ -18,8 +18,10 @@ A tibble containing the latest detections for the specified project.
 Wrapper around the 'detections_project_read' endpoint to retrieve the latest detections for a specific project.
 }
 \examples{
-# Get the latest 100 detections for a project named 'my_project'
+\dontrun {
+#' # Get the latest 100 detections for a project named 'my_project'
 get_latest_detections_by_project(project_name = 'my_project')
+}
 
 # Get the latest 50 detections for a project named 'my_project'
 get_latest_detections_by_project(latest = 50, project_name = 'my_project')
