@@ -48,8 +48,10 @@ ecopi_api <- function(resource, ..., params = list()) {
 #' @return Data frame
 #' @export
 #' @examples
-#' response <- ecopi_api("example", params = list(param1 = "value1"))
+#' \dontrun{
+#' response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
 #' resp_body_json_to_df(response)
+#' }
 #' @importFrom httr2 resp_body_json
 resp_body_json_to_df <- function(api_response) {
   api_response |>
@@ -96,8 +98,10 @@ get_detections_list <- function(params = list()) {
 #' @export
 #'
 #' @examples
+#' \dontrun {
 #' # Get the latest 100 detections
 #' get_latest_detections()
+#' }
 #'
 #' # Get the latest 50 detections
 #' get_latest_detections(50)
@@ -118,8 +122,10 @@ get_latest_detections <- function(latest = 100) {
 #' @export
 #'
 #' @examples
-#' # Get the latest 100 detections for a project named 'my_project'
+#' \dontrun {
+#' #' # Get the latest 100 detections for a project named 'my_project'
 #' get_latest_detections_by_project(project_name = 'my_project')
+#' }
 #'
 #' # Get the latest 50 detections for a project named 'my_project'
 #' get_latest_detections_by_project(latest = 50, project_name = 'my_project')
