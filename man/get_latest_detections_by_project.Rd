@@ -4,12 +4,12 @@
 \alias{get_latest_detections_by_project}
 \title{Get latest detections by project name.}
 \usage{
-get_latest_detections_by_project(latest = 100, project_name)
+get_latest_detections_by_project(project_name, latest = 100)
 }
 \arguments{
-\item{latest}{A numeric value indicating the number of latest detections to return (default 100).}
-
 \item{project_name}{A character value indicating the name of the project to retrieve detections for.}
+
+\item{latest}{A numeric value indicating the number of latest detections to return (default 100).}
 }
 \value{
 A tibble containing the latest detections for the specified project.

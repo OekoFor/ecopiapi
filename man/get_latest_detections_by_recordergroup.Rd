@@ -5,17 +5,17 @@
 \title{Get latest detections by recorder group.}
 \usage{
 get_latest_detections_by_recordergroup(
-  latest = 100,
   project_name,
-  recordergroup_name = "default"
+  recordergroup_name = "default",
+  latest = 100
 )
 }
 \arguments{
-\item{latest}{A numeric value indicating the number of latest detections to return (default 100).}
-
 \item{project_name}{A character value indicating the name of the project to retrieve detections for.}
 
 \item{recordergroup_name}{A character value indicating the name of the recorder group to retrieve detections for. Default is 'default'.}
+
+\item{latest}{A numeric value indicating the number of latest detections to return (default 100).}
 }
 \value{
 A tibble containing the latest detections for the specified recorder group.

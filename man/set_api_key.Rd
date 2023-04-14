@@ -4,7 +4,7 @@
 \alias{set_api_key}
 \title{Set API key as an environment variable}
 \usage{
-set_api_key(api_key_name = NULL, api_key = NULL)
+set_api_key(api_key_name = "API_KEY", api_key = NULL)
 }
 \arguments{
 \item{api_key_name}{A character string specifying the name of the API key.}
