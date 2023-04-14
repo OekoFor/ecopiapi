@@ -4,12 +4,12 @@
 \alias{get_latest_detections_by_recorder}
 \title{Get latest detections by recorder name.}
 \usage{
-get_latest_detections_by_recorder(latest = 100, recorder_name)
+get_latest_detections_by_recorder(recorder_name, latest = 100)
 }
 \arguments{
-\item{latest}{A numeric value indicating the number of latest detections to return (default 100).}
-
 \item{recorder_name}{A character value indicating the name of the recorder to retrieve detections for.}
+
+\item{latest}{A numeric value indicating the number of latest detections to return (default 100).}
 }
 \value{
 A tibble containing the latest detections for the specified recorder.
