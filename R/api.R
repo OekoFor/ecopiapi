@@ -133,7 +133,7 @@ get_latest_detections <- function(latest = 100) {
 #' # Get the latest 50 detections for a project named 'my_project'
 #' get_latest_detections_by_project(latest = 50, project_name = "my_project")
 get_latest_detections_by_project <-
-  function(latest = 100, project_name) {
+  function(project_name, latest = 100) {
     ecopi_api(
       "GET /detections/latest{latest}/project/{project_name}/",
       latest = latest,
@@ -160,7 +160,7 @@ get_latest_detections_by_project <-
 #' # Get the latest 50 detections for a recorder named 'my_recorder'
 #' get_latest_detections_by_recorder(latest = 50, recorder_name = "my_recorder")
 get_latest_detections_by_recorder <-
-  function(latest = 100, recorder_name) {
+  function(recorder_name, latest = 100) {
     ecopi_api(
       "GET /detections/latest{latest}/recorder/{recorder_name}/",
       latest = latest,
@@ -187,9 +187,9 @@ get_latest_detections_by_recorder <-
 #' # Get the latest 50 detections for a recorder group named 'my_group' in project 'my_project'
 #' get_latest_detections_by_recordergroup(latest = 50, project_name = "my_project", recordergroup_name = "my_group")
 get_latest_detections_by_recordergroup <-
-  function(latest = 100,
-           project_name,
-           recordergroup_name = "default") {
+  function(project_name,
+           recordergroup_name = "default",
+           latest = 100) {
     ecopi_api(
       "GET /detections/latest{latest}/recordergroup/{project_name}/{recordergroup_name}/",
       latest = latest,
@@ -278,10 +278,8 @@ get_projects_list <- function(params = list()) {
 #'
 #' @export
 get_project_info <- function(project_name) {
-  ecopi_api(
-    "GET /projects/{project_name}/",
-    project_name = project_name
-  ) |>
+  ecopi_api("GET /projects/{project_name}/",
+            project_name = project_name) |>
     resp_body_json_to_df()
 }
 
@@ -333,14 +331,15 @@ get_recordergroups_list <- function(params = list()) {
 #' @return A list containing information about the specified recorder group: \url{https://api.ecopi.de/api/docs/#operation/recordergroups_read}.
 #'
 #' @export
-get_recordergroup_info <- function(project_name, recordergroup_name) {
-  ecopi_api(
-    "GET /recordergroups/{project_name}/{recordergroup_name}/",
-    project_name = project_name,
-    recordergroup_name = recordergroup_name
-  ) |>
-    resp_body_json_to_df()
-}
+get_recordergroup_info <-
+  function(project_name, recordergroup_name) {
+    ecopi_api(
+      "GET /recordergroups/{project_name}/{recordergroup_name}/",
+      project_name = project_name,
+      recordergroup_name = recordergroup_name
+    ) |>
+      resp_body_json_to_df()
+  }
 
 
 # Logs ------------------------------------------------------------------------------------------------------------
@@ -387,10 +386,8 @@ get_recorder_logs_list <- function(params = list()) {
 #'
 #' @export
 get_recorder_log_info <- function(recorder_name) {
-  ecopi_api(
-    "GET /recorderlogs/{recorder_name}/",
-    recorder_name = recorder_name
-  ) |>
+  ecopi_api("GET /recorderlogs/{recorder_name}/",
+            recorder_name = recorder_name) |>
     resp_body_json_to_df()
 }
 
@@ -440,10 +437,8 @@ get_recorders_list <- function(params = list()) {
 #'
 #' @export
 get_recorder_info <- function(recorder_name) {
-  ecopi_api(
-    "GET /recorders/{recorder_name}/",
-    recorder_name = recorder_name
-  ) |>
+  ecopi_api("GET /recorders/{recorder_name}/",
+            recorder_name = recorder_name) |>
     resp_body_json_to_df()
 }
 
@@ -500,11 +495,12 @@ get_recorder_states_list <- function(params = list()) {
 #' @return A tibble containing the latest recorder states for the specified recorder: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_recorder_read}.
 #'
 #' @export
-get_latest_recorder_states <- function(recorder_name, latest = 100) {
-  ecopi_api(
-    "GET /recorderstates/latest{latest}/recorder/{recorder_name}/",
-    recorder_name = recorder_name,
-    latest = latest
-  ) |>
-    resp_body_json_to_df()
-}
+get_latest_recorder_states <-
+  function(recorder_name, latest = 100) {
+    ecopi_api(
+      "GET /recorderstates/latest{latest}/recorder/{recorder_name}/",
+      recorder_name = recorder_name,
+      latest = latest
+    ) |>
+      resp_body_json_to_df()
+  }
