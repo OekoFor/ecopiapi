@@ -12,7 +12,7 @@
 #' set_api_key(api_key_name = "API_KEY", api_key = "your_api_key")
 #' }
 #' @export
-set_api_key <- function(api_key_name = NULL,
+set_api_key <- function(api_key_name = "API_KEY",
                         api_key = NULL) {
   if (is.null(api_key_name)) {
     stop("Please provide a key name")
