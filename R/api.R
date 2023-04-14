@@ -57,9 +57,10 @@ ecopi_api <- function(resource, ..., params = list()) {
 #' @importFrom httr2 resp_body_json
 resp_body_json_to_df <- function(api_response) {
   api_response |>
-    resp_body_json() |>
-    data.table::rbindlist(fill = TRUE) |>
-    tibble::as_tibble()
+    resp_body_json(simplifyVector = TRUE)
+  # |>
+  #   data.table::rbindlist(fill = TRUE) |>
+  #   tibble::as_tibble()
 }
 
 
@@ -281,7 +282,7 @@ get_project_info <- function(project_name) {
     "GET /projects/{project_name}/",
     project_name = project_name
   ) |>
-    resp_body_json()
+    resp_body_json_to_df()
 }
 
 
@@ -310,7 +311,7 @@ get_project_info <- function(project_name) {
 #' @export
 get_recordergroups_list <- function(params = list()) {
   ecopi_api("GET /recordergroups/", params = params) |>
-    resp_body_json()
+    resp_body_json_to_df()
 }
 
 
@@ -338,7 +339,7 @@ get_recordergroup_info <- function(project_name, recordergroup_name) {
     project_name = project_name,
     recordergroup_name = recordergroup_name
   ) |>
-    resp_body_json()
+    resp_body_json_to_df()
 }
 
 
@@ -390,7 +391,7 @@ get_recorder_log_info <- function(recorder_name) {
     "GET /recorderlogs/{recorder_name}/",
     recorder_name = recorder_name
   ) |>
-    resp_body_json()
+    resp_body_json_to_df()
 }
 
 
@@ -418,7 +419,7 @@ get_recorder_log_info <- function(recorder_name) {
 #' @export
 get_recorders_list <- function(params = list()) {
   ecopi_api("GET /recorders/", params = params) |>
-    resp_body_json()
+    resp_body_json_to_df()
 }
 
 #' Get recorder info.
@@ -443,7 +444,7 @@ get_recorder_info <- function(recorder_name) {
     "GET /recorders/{recorder_name}/",
     recorder_name = recorder_name
   ) |>
-    resp_body_json()
+    resp_body_json_to_df()
 }
 
 
