@@ -22,6 +22,12 @@ authentication (privat repo).
 devtools::install_github("OekoFor/ecopiapi", auth_token = {GITHUB_PAT})
 ```
 
+Install a specific version
+
+``` r
+devtools::install_github("OekoFor/ecopiapi@0.0.9", auth_token = {GITHUB_PAT})
+```
+
 ## Example
 
 ``` r
