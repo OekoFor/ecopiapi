@@ -4,12 +4,12 @@
 \alias{set_api_key}
 \title{Set API key as an environment variable}
 \usage{
-set_api_key(api_key_name = "API_KEY", api_key = NULL)
+set_api_key(api_key = NULL, api_key_name = "API_KEY")
 }
 \arguments{
-\item{api_key_name}{A character string specifying the name of the API key.}
-
 \item{api_key}{A character string specifying the value of the API key. If not provided, the user will be prompted to enter it.}
+
+\item{api_key_name}{A character string specifying the name of the API key.}
 }
 \value{
 NULL. The function sets the API key as an environment variable and does not return a value.
