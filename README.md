@@ -30,6 +30,10 @@ devtools::install_github("OekoFor/ecopiapi@0.0.9", auth_token = {GITHUB_PAT})
 
 ## Example
 
+To interact with the API, you need a valid key. It is recommended to
+store it as an environmental variable in ‘.Renviron’ in the root
+directory of th project. The envar must be named ‘ECOPI_API_KEY’.
+
 ``` r
 library(ecopiapi)
 get_detections_list(params = list("project_name" = "017_neeri", "datetime__month" = 3))
