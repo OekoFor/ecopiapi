@@ -35,7 +35,7 @@ ecopi_error_body <- function(resp) {
 
 ecopi_api <- function(resource, ..., params = list()) {
   request("https://api.ecopi.de/api/") |>
-    req_headers(Authorization = paste("Token", get_api_key())) |>
+    req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
     req_user_agent("ecopiapi") |>
     req_error(body = ecopi_error_body) |>
     req_template(resource, ...) |>
