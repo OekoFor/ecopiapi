@@ -69,24 +69,19 @@ resp_body_json_to_df <- function(api_response) {
 
 #' Get detections list.
 #'
-#' Wrapper around the 'detections_list' endpoint to retrieve a list of detections based on the specified query parameters.
+#' Wrapper around the 'ListView Detectionas' endpoint to retrieve a list of detections based on the specified query parameters.
 #'
-#' @param params A list of key-value pairs representing the query parameters to be sent with the API request.
+#' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)
 #'
 #' @examples
 #' # Retrieve a list of detections for project '017_neeri' that occurred in March (month=3)
-#' get_detections_list(params = list("project_name" = "017_neeri", "datetime__month" = 3))
+#' get_detections_list(project_name = "017_neeri", datetime__month = 3)
 #'
-#' @details
-#' The 'params' parameter is a list of key-value pairs that represent the query parameters to be sent with the API request.
-#' Each key represents a query parameter, and each value represents the value of the query parameter.
-#' For example, to retrieve detections for a specific project, you can set the 'project_name' parameter to the name of the project.
-#' The available query parameters are documented in the EcoPi API documentation: \url(https://api.ecopi.de/api/docs/#operation/detections_list).
-#'
-#' @return A tibble containing the detections that match the specified query parameters: \url(https://api.ecopi.de/api/docs/#operation/detections_list)
+#' @return A data.frame containing the detections that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)
 #'
 #' @export
-get_detections_list <- function(params = list()) {
+get_detections <- function(...) {
+  params = list(...)
   ecopi_api("GET /detections/", params = params) |>
     resp_body_json_to_df()
 }
