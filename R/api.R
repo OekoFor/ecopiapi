@@ -69,7 +69,7 @@ resp_body_json_to_df <- function(api_response) {
 
 #' Get detections list.
 #'
-#' Wrapper around the 'ListView Detectionas' endpoint to retrieve a list of detections based on the specified query parameters.
+#' Wrapper around the 'ListView Detections' endpoint to retrieve a list of detections based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)
 #'
@@ -86,114 +86,21 @@ get_detections <- function(...) {
     resp_body_json_to_df()
 }
 
-#' Get latest detections.
+#' Get media file.
 #'
-#' Wrapper around the 'detections_read' endpoint to retrieve the latest detections.
+#' Wrapper around the 'MediaFile Detection' endpoint to retrieve a media file from a detection.
 #'
-#' @param latest A numeric value indicating the number of latest detections to return (default 100).
-#'
-#' @return A tibble containing the latest detections.
-#' @export
+#' @param uid uid of that specifiy detection. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_media_read)
 #'
 #' @examples
-#' \dontrun {
-#' # Get the latest 100 detections
-#' get_latest_detections()
-#' }
+#' get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")
 #'
-#' # Get the latest 50 detections
-#' get_latest_detections(50)
-get_latest_detections <- function(latest = 100) {
-  ecopi_api("GET /detections/latest{latest}", latest = latest) |>
-    resp_body_json_to_df()
+#' @return object of type "httr2_response". contains raw audio in body
+#'
+#' @export
+get_mediafile <- function(uid) {
+  ecopi_api("GET /detections/media/{uid}", uid = uid)
 }
-
-
-#' Get latest detections by project name.
-#'
-#' Wrapper around the 'detections_project_read' endpoint to retrieve the latest detections for a specific project.
-#'
-#' @param latest A numeric value indicating the number of latest detections to return (default 100).
-#' @param project_name A character value indicating the name of the project to retrieve detections for.
-#'
-#' @return A tibble containing the latest detections for the specified project.
-#' @export
-#'
-#' @examples
-#' \dontrun {
-#' #' # Get the latest 100 detections for a project named 'my_project'
-#' get_latest_detections_by_project(project_name = 'my_project')
-#' }
-#'
-#' # Get the latest 50 detections for a project named 'my_project'
-#' get_latest_detections_by_project(latest = 50, project_name = "my_project")
-get_latest_detections_by_project <-
-  function(project_name, latest = 100) {
-    ecopi_api(
-      "GET /detections/latest{latest}/project/{project_name}/",
-      latest = latest,
-      project_name = project_name
-    ) |>
-      resp_body_json_to_df()
-  }
-
-
-#' Get latest detections by recorder name.
-#'
-#' Wrapper around the 'detections_recorder_read' endpoint to retrieve the latest detections for a specific recorder.
-#'
-#' @param latest A numeric value indicating the number of latest detections to return (default 100).
-#' @param recorder_name A character value indicating the name of the recorder to retrieve detections for.
-#'
-#' @return A tibble containing the latest detections for the specified recorder.
-#' @export
-#'
-#' @examples
-#' # Get the latest 100 detections for a recorder named 'my_recorder'
-#' get_latest_detections_by_recorder(recorder_name = "my_recorder")
-#'
-#' # Get the latest 50 detections for a recorder named 'my_recorder'
-#' get_latest_detections_by_recorder(latest = 50, recorder_name = "my_recorder")
-get_latest_detections_by_recorder <-
-  function(recorder_name, latest = 100) {
-    ecopi_api(
-      "GET /detections/latest{latest}/recorder/{recorder_name}/",
-      latest = latest,
-      recorder_name = recorder_name
-    ) |>
-      resp_body_json_to_df()
-  }
-
-#' Get latest detections by recorder group.
-#'
-#' Wrapper around the 'detections_recordergroup_read' endpoint to retrieve the latest detections for a specific recorder group.
-#'
-#' @param latest A numeric value indicating the number of latest detections to return (default 100).
-#' @param project_name A character value indicating the name of the project to retrieve detections for.
-#' @param recordergroup_name A character value indicating the name of the recorder group to retrieve detections for. Default is 'default'.
-#'
-#' @return A tibble containing the latest detections for the specified recorder group.
-#' @export
-#'
-#' @examples
-#' # Get the latest 100 detections for the default recorder group in project 'my_project'
-#' get_latest_detections_by_recordergroup(project_name = "my_project")
-#'
-#' # Get the latest 50 detections for a recorder group named 'my_group' in project 'my_project'
-#' get_latest_detections_by_recordergroup(latest = 50, project_name = "my_project", recordergroup_name = "my_group")
-get_latest_detections_by_recordergroup <-
-  function(project_name,
-           recordergroup_name = "default",
-           latest = 100) {
-    ecopi_api(
-      "GET /detections/latest{latest}/recordergroup/{project_name}/{recordergroup_name}/",
-      latest = latest,
-      project_name = project_name,
-      recordergroup_name = recordergroup_name
-    ) |>
-      resp_body_json_to_df()
-  }
-
 
 
 # Recordings ------------------------------------------------------------------------------------------------------
