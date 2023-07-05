@@ -95,7 +95,7 @@ get_detections <- function(...) {
 #' @examples
 #' get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")
 #'
-#' @return object of type "httr2_response". contains raw audio in body
+#' @return object of type "httr2_response". contains raw data in body (currently audio or image)
 #'
 #' @export
 get_mediafile <- function(uid) {
