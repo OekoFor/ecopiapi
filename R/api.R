@@ -81,7 +81,7 @@ resp_body_json_to_df <- function(api_response) {
 #'
 #' @export
 get_detections <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /detections/", params = params) |>
     resp_body_json_to_df()
 }
@@ -181,7 +181,8 @@ get_projects_list <- function(params = list()) {
 #' @export
 get_project_info <- function(project_name) {
   ecopi_api("GET /projects/{project_name}/",
-            project_name = project_name) |>
+    project_name = project_name
+  ) |>
     resp_body_json_to_df()
 }
 
@@ -289,7 +290,8 @@ get_recorder_logs_list <- function(params = list()) {
 #' @export
 get_recorder_log_info <- function(recorder_name) {
   ecopi_api("GET /recorderlogs/{recorder_name}/",
-            recorder_name = recorder_name) |>
+    recorder_name = recorder_name
+  ) |>
     resp_body_json_to_df()
 }
 
@@ -340,7 +342,8 @@ get_recorders_list <- function(params = list()) {
 #' @export
 get_recorder_info <- function(recorder_name) {
   ecopi_api("GET /recorders/{recorder_name}/",
-            recorder_name = recorder_name) |>
+    recorder_name = recorder_name
+  ) |>
     resp_body_json_to_df()
 }
 
