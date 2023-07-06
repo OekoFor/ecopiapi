@@ -75,7 +75,7 @@ resp_body_json_to_df <- function(api_response) {
 #'
 #' @examples
 #' # Retrieve a list of detections for project '017_neeri' that occurred in March (month=3)
-#' get_detections_list(project_name = "017_neeri", datetime__month = 3)
+#' get_detections(project_name = "017_neeri", datetime__month = 3)
 #'
 #' @return A data.frame containing the detections that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)
 #'
@@ -108,24 +108,20 @@ get_mediafile <- function(uid) {
 
 #' Get recordings list.
 #'
-#' Wrapper around the 'recordings_list' endpoint to retrieve a list of recordings based on the specified query parameters.
+#' Wrapper around the 'ListView Recordings' endpoint to retrieve a dataframe of recordings based on the specified query parameters.
 #'
-#' @param params A list of key-value pairs representing the query parameters to be sent with the API request.
+#' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/recordings_list)
+#'
 #'
 #' @examples
 #' # Retrieve a list of recordings for project '017_neeri' that occurred in March (month=3)
-#' get_recordings_list(params = list("project_name" = "017_neeri", "datetime__month" = 3))
+#' get_recordings(project_name = "017_neeri", datetime__month = 3))
 #'
-#' @details
-#' The 'params' parameter is a list of key-value pairs that represent the query parameters to be sent with the API request.
-#' Each key represents a query parameter, and each value represents the value of the query parameter.
-#' For example, to retrieve recordings for a specific project, you can set the 'project_name' parameter to the name of the project.
-#' The available query parameters are documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#tag/recordings_list}.
-#'
-#' @return A tibble containing the recordings that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/recordings_list}.
+#' @return A data.frame containing the recordings that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docs/#operation/recordings_list)
 #'
 #' @export
-get_recordings_list <- function(params = list()) {
+get_recordings <- function(...) {
+  params = list(...)
   ecopi_api("GET /recordings/", params = params) |>
     resp_body_json_to_df()
 }
@@ -138,25 +134,20 @@ get_recordings_list <- function(params = list()) {
 #'
 #' Wrapper around the 'projects_list' endpoint to retrieve a list of projects based on the specified query parameters.
 #'
-#' @param params A list of key-value pairs representing the query parameters to be sent with the API request.
+#' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/projects_list)
 #'
 #' @examples
-#' # retrieve a list of all projects
-#' get_projects_list()
+#' # retrieve a dataframe of all projects
+#' get_projects()
 #'
 #' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-#' get_projects_list(params = list("project_name__in" = "red_panda, green_banana"))
+#' get_projects(project_name__in = "red_panda, green_banana"))
 #'
-#' @details
-#' The 'params' parameter is a list of key-value pairs that represent the query parameters to be sent with the API request.
-#' Each key represents a query parameter, and each value represents the value of the query parameter.
-#' For example, to retrieve projects that contain a specific string in their name, you can set the 'name__contains' parameter to the string to search for.
-#' The available query parameters are documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/projects_list}.
-#'
-#' @return A tibble containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/projects_list}.
+#' @return A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/projects_list}.
 #'
 #' @export
-get_projects_list <- function(params = list()) {
+get_projects <- function(...) {
+  params = list(...)
   ecopi_api("GET /projects/", params = params) |>
     resp_body_json_to_df()
 }
