@@ -132,7 +132,7 @@ get_recordings <- function(...) {
 
 #' Get projects list.
 #'
-#' Wrapper around the 'projects_list' endpoint to retrieve a list of projects based on the specified query parameters.
+#' Wrapper around the 'ListView Projects' endpoint to retrieve a list of projects based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/projects_list)
 #'
@@ -141,7 +141,7 @@ get_recordings <- function(...) {
 #' get_projects()
 #'
 #' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-#' get_projects(project_name__in = "red_panda, green_banana"))
+#' get_projects(project_name__in = "red_panda, green_banana")
 #'
 #' @return A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/projects_list}.
 #'
@@ -157,7 +157,7 @@ get_projects <- function(...) {
 #'
 #' Wrapper around the 'projects_read' endpoint to retrieve information about a specific project.
 #'
-#' @param project_name The name of the project to retrieve information about.
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#operation/projects_read}.
 #'
 #' @examples
 #' # Retrieve information about the '017_neeri' project
@@ -183,25 +183,20 @@ get_project_info <- function(project_name) {
 
 #' Get recorder groups list.
 #'
-#' Wrapper around the 'recordergroups_list' endpoint to retrieve a list of recorder groups based on the specified query parameters.
+#' Wrapper around the 'ListView RecorderGroups' endpoint to retrieve a list of recorder groups based on the specified query parameters.
 #' This contains the configurations and species list
 #'
-#' @param params A list of key-value pairs representing the query parameters to be sent with the API request.
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recordergroups_list}.
 #'
 #' @examples
-#' # Retrieve a list of recorder groups for project 'oekofor'
-#' get_recordergroups_list(params = list("project_name" = "oekofor"))
+#' # Retrieve a data frame of recorder groups for project 'oekofor'
+#' get_recordergroups(project_name = "oekofor")
 #'
-#' @details
-#' The 'params' parameter is a list of key-value pairs that represent the query parameters to be sent with the API request.
-#' Each key represents a query parameter, and each value represents the value of the query parameter.
-#' For example, to retrieve recorder groups for a specific project, you can set the 'project_name' parameter to the name of the project.
-#' The available query parameters are documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recordergroups_list}.
-#'
-#' @return A list containing the recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recordergroups_list}.
+#' @return A list containing the recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/recordergroups_list}.
 #'
 #' @export
-get_recordergroups_list <- function(params = list()) {
+get_recordergroups <- function(...) {
+  params = list(...)
   ecopi_api("GET /recordergroups/", params = params) |>
     resp_body_json_to_df()
 }
@@ -225,39 +220,35 @@ get_recordergroups_list <- function(params = list()) {
 #' @return A list containing information about the specified recorder group: \url{https://api.ecopi.de/api/docs/#operation/recordergroups_read}.
 #'
 #' @export
-get_recordergroup_info <-
-  function(project_name, recordergroup_name) {
-    ecopi_api(
-      "GET /recordergroups/{project_name}/{recordergroup_name}/",
-      project_name = project_name,
-      recordergroup_name = recordergroup_name
-    ) |>
-      resp_body_json_to_df()
-  }
+# get_recordergroup_info <-
+#   function(project_name, recordergroup_name) {
+#     ecopi_api(
+#       "GET /recordergroups/{project_name}/{recordergroup_name}/",
+#       project_name = project_name,
+#       recordergroup_name = recordergroup_name
+#     ) |>
+#       resp_body_json_to_df()
+#   }
 
 
 # Logs ------------------------------------------------------------------------------------------------------------
 
 #' Get recorder logs list.
 #'
-#' Wrapper around the 'recorderlogs_list' endpoint to retrieve a list of recorder logs based on the specified query parameters.
+#' Wrapper around the 'ListView RecorderLogs' endpoint to retrieve a list of recorder logs based on the specified query parameters.
 #'
-#' @param params A list of key-value pairs representing the query parameters to be sent with the API request.
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#tag/recorderlogs}.
+#'
 #'
 #' @examples
-#' # Retrieve a list of recorder logs for project '017_neeri'
-#' get_recorder_logs_list(params = list("project_name" = "017_neeri"))
+#' # Retrieve a dataframe of recorder logs for project '017_neeri'
+#' get_recorder_logs(project_name = "017_neeri")
 #'
-#' @details
-#' The 'params' parameter is a list of key-value pairs that represent the query parameters to be sent with the API request.
-#' Each key represents a query parameter, and each value represents the value of the query parameter.
-#' For example, to retrieve recorder logs for a specific project, you can set the 'project_name' parameter to the name of the project.
-#' The available query parameters are documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recorderlogs_list}.
-#'
-#' @return A tibble containing the recorder logs that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorderlogs_list}.
+#' @return A dataframe containing the recorder logs that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#tag/recorderlogs}.
 #'
 #' @export
-get_recorder_logs_list <- function(params = list()) {
+get_recorderlogs <- function(...) {
+  params = list(...)
   ecopi_api("GET /recorderlogs/", params = params) |>
     resp_body_json_to_df()
 }
@@ -279,12 +270,12 @@ get_recorder_logs_list <- function(params = list()) {
 #' @return A list containing information about the specified recorder log: \url{https://api.ecopi.de/api/docs/#operation/recorderlogs_read}.
 #'
 #' @export
-get_recorder_log_info <- function(recorder_name) {
-  ecopi_api("GET /recorderlogs/{recorder_name}/",
-    recorder_name = recorder_name
-  ) |>
-    resp_body_json_to_df()
-}
+# get_recorder_log_info <- function(recorder_name) {
+#   ecopi_api("GET /recorderlogs/{recorder_name}/",
+#     recorder_name = recorder_name
+#   ) |>
+#     resp_body_json_to_df()
+# }
 
 
 
@@ -292,24 +283,19 @@ get_recorder_log_info <- function(recorder_name) {
 
 #' Get recorders list.
 #'
-#' Wrapper around the 'recorders_list' endpoint to retrieve a list of recorders based on the specified query parameters.
+#' Wrapper around the 'ListView Recorders' endpoint to retrieve a list of recorders based on the specified query parameters.
 #'
-#' @param params A list of key-value pairs representing the query parameters to be sent with the API request.
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_list}.
 #'
 #' @examples
 #' # Retrieve a list of recorders for project '017_neeri'
-#' get_recorders_list(params = list("project_name" = "017_neeri"))
+#' get_recorders(project_name = "017_neeri")
 #'
-#' @details
-#' The 'params' parameter is a list of key-value pairs that represent the query parameters to be sent with the API request.
-#' Each key represents a query parameter, and each value represents the value of the query parameter.
-#' For example, to retrieve recorders for a specific project, you can set the 'project_name' parameter to the name of the project.
-#' The available query parameters are documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recorders_list}.
-#'
-#' @return A list containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorders_list}.
+#' @return A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_list}.
 #'
 #' @export
-get_recorders_list <- function(params = list()) {
+get_recorders <- function(...) {
+  params = list(...)
   ecopi_api("GET /recorders/", params = params) |>
     resp_body_json_to_df()
 }
@@ -331,43 +317,38 @@ get_recorders_list <- function(params = list()) {
 #' @return A list containing information about the specified recorder: \url{https://api.ecopi.de/api/docs/#operation/recorders_read}.
 #'
 #' @export
-get_recorder_info <- function(recorder_name) {
-  ecopi_api("GET /recorders/{recorder_name}/",
-    recorder_name = recorder_name
-  ) |>
-    resp_body_json_to_df()
-}
+# get_recorder_info <- function(recorder_name) {
+#   ecopi_api("GET /recorders/{recorder_name}/",
+#     recorder_name = recorder_name
+#   ) |>
+#     resp_body_json_to_df()
+# }
 
 
 
 # Recorderstates --------------------------------------------------------------------------------------------------
 #' Get recorder states list.
 #'
-#' Wrapper around the 'recorderstates_list' endpoint to retrieve a list of recorder states based on the specified query parameters.
+#' Wrapper around the 'ListView RecorderStates' endpoint to retrieve a list of recorder states based on the specified query parameters.
 #'
-#' @param params A list of key-value pairs representing the query parameters to be sent with the API request.
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorderstates_list}
 #'
 #' @examples
-#'
 #' # Retrieve all recorder states
-#' get_recorder_states_list()
+#' get_recorder_states()
 #'
 #' # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-#' get_recorder_states_list(params = list("recorder_name" = "00000000d76d0bf9"))
+#' get_recorder_states(recorder_name = "00000000d76d0bf9")
 #'
-#' @details
-#' The 'params' parameter is a list of key-value pairs that represent the query parameters to be sent with the API request.
-#' Each key represents a query parameter, and each value represents the value of the query parameter.
-#' For example, to retrieve recorder states for a specific recorder, you can set the 'recorder_name' parameter to the name of the recorder.
-#' The available query parameters are documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_list}.
-#'
-#' @return A tibble containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_list}.
+#' @return A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_list}.
 #'
 #' @export
-get_recorder_states_list <- function(params = list()) {
+get_recorderstates <- function(...) {
+  params = list(...)
   ecopi_api("GET /recorderstates/", params = params) |>
     resp_body_json_to_df()
 }
+
 
 
 #' Get latest recorder states.
@@ -391,12 +372,12 @@ get_recorder_states_list <- function(params = list()) {
 #' @return A tibble containing the latest recorder states for the specified recorder: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_recorder_read}.
 #'
 #' @export
-get_latest_recorder_states <-
-  function(recorder_name, latest = 100) {
-    ecopi_api(
-      "GET /recorderstates/latest{latest}/recorder/{recorder_name}/",
-      recorder_name = recorder_name,
-      latest = latest
-    ) |>
-      resp_body_json_to_df()
-  }
+# get_latest_recorder_states <-
+#   function(recorder_name, latest = 100) {
+#     ecopi_api(
+#       "GET /recorderstates/latest{latest}/recorder/{recorder_name}/",
+#       recorder_name = recorder_name,
+#       latest = latest
+#     ) |>
+#       resp_body_json_to_df()
+#   }
