@@ -13,10 +13,10 @@ get_detections(...)
 A data.frame containing the detections that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)
 }
 \description{
-Wrapper around the 'ListView Detectionas' endpoint to retrieve a list of detections based on the specified query parameters.
+Wrapper around the 'ListView Detections' endpoint to retrieve a list of detections based on the specified query parameters.
 }
 \examples{
 # Retrieve a list of detections for project '017_neeri' that occurred in March (month=3)
-get_detections_list(project_name = "017_neeri", datetime__month = 3)
+get_detections(project_name = "017_neeri", datetime__month = 3)
 
 }
