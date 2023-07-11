@@ -7,7 +7,7 @@
 get_project_info(project_name)
 }
 \arguments{
-\item{project_name}{The name of the project to retrieve information about.}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#operation/projects_read}.}
 }
 \value{
 A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#operation/projects_read}.
