@@ -172,7 +172,7 @@ get_projects <- function(...) {
 #' @export
 get_project_info <- function(project_name) {
   ecopi_api("GET /projects/{project_name}/",
-    project_name = project_name
+            project_name = project_name
   ) |>
     resp_body_json_to_df()
 }
