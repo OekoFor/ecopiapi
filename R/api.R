@@ -242,7 +242,7 @@ get_recordergroups <- function(...) {
 #'
 #' @examples
 #' # Retrieve a dataframe of recorder logs for project '017_neeri'
-#' get_recorder_logs(project_name = "017_neeri")
+#' get_recorderlogs(project_name = "017_neeri")
 #'
 #' @return A dataframe containing the recorder logs that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#tag/recorderlogs}.
 #'
@@ -261,7 +261,7 @@ get_recorderlogs <- function(...) {
 #'
 #' @examples
 #' # Retrieve information about the recorder log for recorder '00000000d76d0bf9'
-#' get_recorder_log_info(recorder_name = "00000000d76d0bf9")
+#' get_recorderlog_info(recorder_name = "00000000d76d0bf9")
 #'
 #' @details
 #' This function retrieves information about a specific recorder log, based on the recorder name provided in the 'recorder_name' parameter.
@@ -308,7 +308,7 @@ get_recorders <- function(...) {
 #'
 #' @examples
 #' # Retrieve information about the recorder '00000000d76d0bf9'
-#' get_recorder_info(recorder_name = "00000000d76d0bf9")
+#' get_recorderinfo(recorder_name = "00000000d76d0bf9")
 #'
 #' @details
 #' This function retrieves information about a specific recorder, based on the recorder name provided in the 'recorder_name' parameter.
@@ -335,7 +335,7 @@ get_recorders <- function(...) {
 #'
 #' @examples
 #' # Retrieve all recorder states
-#' get_recorder_states()
+#' get_recorderstates()
 #'
 #' # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
 #' get_recorder_states(recorder_name = "00000000d76d0bf9")
@@ -350,34 +350,25 @@ get_recorderstates <- function(...) {
 }
 
 
-
-#' Get latest recorder states.
+# Summaryfiles --------------------------------------------------------------------------------------------------
+#' Get summary files of detections.
 #'
-#' Wrapper around the 'recorderstates_recorder_read' endpoint to retrieve the latest recorder states for a specific recorder.
+#' Wrapper around the 'Summary of species counts per recorder within a project' endpoint to retrieve a count of species detections for each recorder in a given project.
 #'
-#' @param recorder_name The name of the recorder to retrieve the latest states for.
-#' @param latest The number of latest recorder states to retrieve (default is 100).
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#tag/meta}
 #'
 #' @examples
-#' # Retrieve the latest 100 recorder states for recorder '00000000d76d0bf9'
-#' get_latest_recorder_states(recorder_name = "00000000d76d0bf9")
+#' # Retrieve a summary of species counts per recorder within a project
+#' get_recorderstates()
 #'
-#' # Retrieve the latest 50 recorder states for recorder '00000000d76d0bf9'
-#' get_latest_recorder_states(recorder_name = "00000000d76d0bf9", latest = 50)
+#' # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
+#' get_summary(project_name = "039_zitro")
 #'
-#' @details
-#' This function retrieves the latest recorder states for a specific recorder, based on the recorder name provided in the 'recorder_name' parameter.
-#' The available information about recorder states is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_recorder_read}.
-#'
-#' @return A tibble containing the latest recorder states for the specified recorder: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_recorder_read}.
+#' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#tag/meta}.
 #'
 #' @export
-# get_latest_recorder_states <-
-#   function(recorder_name, latest = 100) {
-#     ecopi_api(
-#       "GET /recorderstates/latest{latest}/recorder/{recorder_name}/",
-#       recorder_name = recorder_name,
-#       latest = latest
-#     ) |>
-#       resp_body_json_to_df()
-#   }
+get_summary <- function(project_name, ...) {
+  params = list(...)
+  ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/", project_name = project_name, params = params) |>
+    resp_body_json_to_df()
+}
