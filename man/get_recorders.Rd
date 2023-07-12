@@ -25,7 +25,7 @@ The available information about a recorder log is documented in the EcoPi API do
 }
 \examples{
 # Retrieve information about the recorder log for recorder '00000000d76d0bf9'
-get_recorder_log_info(recorder_name = "00000000d76d0bf9")
+get_recorderlog_info(recorder_name = "00000000d76d0bf9")
 
 # Retrieve a list of recorders for project '017_neeri'
 get_recorders(project_name = "017_neeri")

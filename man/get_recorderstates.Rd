@@ -25,10 +25,10 @@ The available information about a recorder is documented in the EcoPi API docume
 }
 \examples{
 # Retrieve information about the recorder '00000000d76d0bf9'
-get_recorder_info(recorder_name = "00000000d76d0bf9")
+get_recorderinfo(recorder_name = "00000000d76d0bf9")
 
 # Retrieve all recorder states
-get_recorder_states()
+get_recorderstates()
 
 # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
 get_recorder_states(recorder_name = "00000000d76d0bf9")

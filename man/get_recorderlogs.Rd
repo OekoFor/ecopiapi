@@ -30,6 +30,6 @@ The available information about a recorder group is documented in the EcoPi API 
 get_recordergroup_info(project_name = "oekofor", recordergroup_name = "default")
 
 # Retrieve a dataframe of recorder logs for project '017_neeri'
-get_recorder_logs(project_name = "017_neeri")
+get_recorderlogs(project_name = "017_neeri")
 
 }
