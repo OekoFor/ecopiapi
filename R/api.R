@@ -58,9 +58,6 @@ ecopi_api <- function(resource, ..., params = list()) {
 resp_body_json_to_df <- function(api_response) {
   api_response |>
     resp_body_json(simplifyVector = TRUE)
-  # |>
-  #   data.table::rbindlist(fill = TRUE) |>
-  #   tibble::as_tibble()
 }
 
 
