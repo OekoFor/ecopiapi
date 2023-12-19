@@ -365,7 +365,7 @@ get_recorderstates <- function(...) {
 #' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#tag/meta}.
 #'
 #' @export
-get_summary <- function(project_name, ...) {
+get_recorderspeciescounts <- function(project_name, ...) {
   params = list(...)
   ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/", project_name = project_name, params = params) |>
     resp_body_json_to_df()
