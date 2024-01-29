@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-`{ecopiapi}` is an R package to get, post and patch using the [ecopiLIve_API](https://api.ecopi.de/api/v0.1/docs/).
+`{ecopiapi}` is an R package to get, post and patch using the [ecoPi Live_API](https://api.ecopi.de/api/v0.1/docs/).
 
 ## Installation
 
