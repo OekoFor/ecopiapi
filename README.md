@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of ecopiapi is to Get, post, patch data from the ecop API.
+`{ecopiapi}` is an R package to get, post and patch using the [ecopiLIve_API](https://api.ecopi.de/api/v0.1/docs/).
 
 ## Installation
 
