@@ -33,7 +33,7 @@ ecopi_error_body <- function(resp) {
 #' @import httr2
 #' @export
 
-ecopi_api <- function(resource, ..., params = list()) {
+ecopi_api <- function(resource, ..., params = list(), new_data=NULL) {
   params <- lapply(params, paste, collapse = ",")
   request("https://api.ecopi.de/api/v0.1") |>
     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
@@ -41,25 +41,8 @@ ecopi_api <- function(resource, ..., params = list()) {
     req_error(body = ecopi_error_body) |>
     req_template(resource, ...) |>
     req_url_query(!!!params) |>
+    req_body_json(new_data) |> # neu eungefügt, wichtig für PATCH funktionen
     req_perform()
-}
-
-ecopi_api2 <- function(resource, ...) {
-  request("https://api.ecopi.de/api/v0.1") |>
-    req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
-    req_user_agent("ecopiapi") |>
-    req_template(resource, ...)
-}
-
-
-ecopi_api3 <- function(resource, ...) {
-  params <- lapply(params, paste, collapse = ",")
-  request("https://api.ecopi.de/api/v0.1") |>
-    req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
-    req_user_agent("ecopiapi") |>
-    req_error(body = ecopi_error_body) |>
-    req_template(resource, ...)
-    req_url_query(!!!params)
 }
 
 
@@ -133,7 +116,7 @@ get_mediafile <- function(uid) {
 #'
 #' @examples
 #' # Retrieve a list of recordings for project '017_neeri' that occurred in March (month=3)
-#' get_recordings(project_name = "017_neeri", datetime__month = 3))
+#' get_recordings(project_name = "017_neeri", datetime__month = 3)
 #'
 #' @return A data.frame containing the recordings that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docs/#operation/recordings_list)
 #'
@@ -352,51 +335,17 @@ get_recorders <- function(...) {
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_partial_update}.
 #'
 #' @examples
-#' # Retrieve a list of recorders for project '017_neeri'
-#' patch_recorders(recorder_name = "017_neeri")
+#' # Update the parameter description of the recorder 00041aefd7jgg1014
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", new_data = list(description = "it is working"))
 #'
-#' @return A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_list}.
+#' @return no return
 #'
 #' @export
-patch_recorders <- function(recorder_name, to_change) {
+
+patch_recorders <- function(recorder_name, to_change, new_data) {
   # params = list(...)
-  ecopi_api2("PATCH /recorders/") |>
-  req_url_path_append(get_recorders(recorder_name = recorder_name)$recorder_name) |>
-  req_body_json(to_change)
+  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name= recorder_name, new_data = new_data)
 }
-
-
-
-patch_recorders2 <- function(..., new_data) {
-  params = list(...)
-  ecopi_api3("PATCH /recorders/", params = params) |>
-    req_body_json(new_data=new_data)
-}
-
-
-
-
-# test it
-# ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name="00041aefd7jgg1014") |>  resp_body_json_to_df() |>
-# ecopi_api("GET /recorders/", params = list(recorder_name = "00041aefd7jgg1014")) |>  resp_body_json()
-
-
-# # get_recorders(recorder_name = "00041aefd7jgg1014")
-# # #
-# ecopi_api2() |> req_url_path_append(get_recorders(recorder_name = "00041aefd7jgg1014")$recorder_name)
-
-
-# a <- patch_recorders(recorder_name = "00041aefd7jgg1014", to_change = list(description= "why is it not working"))
-# a |> req_dry_run()
-# a |> req_perform()
-
-
-
-# a <- patch_recorders2(recorder_name = "00041aefd7jgg1014", new_data="why is it not working")
-# a |> req_dry_run()
-# a |> req_perform()
-
-
 
 
 
