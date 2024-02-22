@@ -22,6 +22,7 @@ ecopi_error_body <- function(resp) {
 #' @param resource A character string specifying the API resource to request.
 #' @param ... Additional arguments to be passed to the req_template() function.
 #' @param params A named list of query parameters to include in the request.
+#' @param new_data A named list of parameters to be updated/ patched.
 #' @return A `response` object from the httr2 package containing the API response.
 #' @examples
 #' \dontrun{
@@ -33,8 +34,9 @@ ecopi_error_body <- function(resp) {
 #' @import httr2
 #' @export
 
-ecopi_api <- function(resource, ..., params = list(), new_data=NULL) {
+ecopi_api <- function(resource, ..., params = list(), new_data=list()) {
   params <- lapply(params, paste, collapse = ",")
+  new_data <- lapply(new_data, paste, collapse = ",")
   request("https://api.ecopi.de/api/v0.1") |>
     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
     req_user_agent("ecopiapi") |>
@@ -333,21 +335,21 @@ get_recorders <- function(...) {
 #' Wrapper around the 'DetailView Recorder' endpoint to update recorders parameters based on the specified body schema.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_partial_update}.
+#' @param recorder_name The name of the recorder to retrieve information about.
 #'
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
-#' patch_recorders(recorder_name = "00041aefd7jgg1014", new_data = list(description = "it is working"))
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "This a recorder ...", lat= 48)
 #'
-#' @return no return
+#' @return <httr2_response>
 #'
 #' @export
 
-patch_recorders <- function(recorder_name, to_change, new_data) {
+patch_recorders <- function(..., recorder_name, new_data) {
   # params = list(...)
+  new_data= list(...)
   ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name= recorder_name, new_data = new_data)
 }
-
-
 
 
 
