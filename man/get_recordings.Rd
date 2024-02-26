@@ -17,6 +17,6 @@ Wrapper around the 'ListView Recordings' endpoint to retrieve a dataframe of rec
 }
 \examples{
 # Retrieve a list of recordings for project '017_neeri' that occurred in March (month=3)
-get_recordings(project_name = "017_neeri", datetime__month = 3))
+get_recordings(project_name = "017_neeri", datetime__month = 3)
 
 }

@@ -335,13 +335,13 @@ get_recorders <- function(...) {
 #' Wrapper around the 'DetailView Recorder' endpoint to update recorders parameters based on the specified body schema.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_partial_update}.
-#' @param recorder_name The name of the recorder to retrieve information about.
+#' @param recorder_name The name of the recorder to update information from.
 #'
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
 #' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "This a recorder ...", lat= 48)
 #'
-#' @return <httr2_response>
+#' @return httr2_response
 #'
 #' @export
 
