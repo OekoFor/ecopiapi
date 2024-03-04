@@ -352,7 +352,7 @@ get_recorders <- function(...) {
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
 #' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "This a recorder ...", lat= 48)
 #' # OR with image
-#' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "Teeeest ...", lat= 48, file_path = "/home/fredericd/Desktop/OekoFor/jpeg_sample.jpeg")
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "Teeeest ...", lat= 48, file_path = "/sample_path/sample.jpeg")
 #'
 #' @return httr2_response
 #'
