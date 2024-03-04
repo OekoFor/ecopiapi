@@ -4,7 +4,7 @@
 \alias{ecopi_api}
 \title{Make API requests to the Ecopi API}
 \usage{
-ecopi_api(resource, ..., params = list(), new_data = list())
+ecopi_api(resource, ..., params = list(), new_data = list(), file_path)
 }
 \arguments{
 \item{resource}{A character string specifying the API resource to request.}
@@ -14,6 +14,8 @@ ecopi_api(resource, ..., params = list(), new_data = list())
 \item{params}{A named list of query parameters to include in the request.}
 
 \item{new_data}{A named list of parameters to be updated/ patched.}
+
+\item{file_path}{A patch currently only important to patch an image a recorder endpoint.}
 }
 \value{
 A \code{response} object from the httr2 package containing the API response.

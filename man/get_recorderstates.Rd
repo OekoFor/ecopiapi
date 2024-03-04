@@ -20,6 +20,6 @@ Wrapper around the 'ListView RecorderStates' endpoint to retrieve a list of reco
 get_recorderstates()
 
 # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-get_recorder_states(recorder_name = "00000000d76d0bf9")
+get_recorderstates(recorder_name = "00000000d76d0bf9")
 
 }
