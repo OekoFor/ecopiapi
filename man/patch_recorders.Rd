@@ -4,7 +4,7 @@
 \alias{patch_recorders}
 \title{Get recorder info.}
 \usage{
-patch_recorders(..., recorder_name, new_data)
+patch_recorders(..., recorder_name, new_data, file_path)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_partial_update}.}
@@ -29,5 +29,7 @@ get_recorderinfo(recorder_name = "00000000d76d0bf9")
 
 # Update the parameter description of the recorder 00041aefd7jgg1014
 patch_recorders(recorder_name = "00041aefd7jgg1014", description= "This a recorder ...", lat= 48)
+# OR with image
+patch_recorders(recorder_name = "00041aefd7jgg1014", description= "Teeeest ...", lat= 48, file_path = "/home/fredericd/Desktop/OekoFor/jpeg_sample.jpeg")
 
 }
