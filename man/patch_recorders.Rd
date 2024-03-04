@@ -10,7 +10,6 @@ patch_recorders(..., recorder_name, new_data)
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_partial_update}.}
 
 \item{recorder_name}{The name of the recorder to update information from.}
-
 }
 \value{
 A list containing information about the specified recorder: \url{https://api.ecopi.de/api/docs/#operation/recorders_read}.
