@@ -23,6 +23,7 @@ ecopi_error_body <- function(resp) {
 #' @param ... Additional arguments to be passed to the req_template() function.
 #' @param params A named list of query parameters to include in the request.
 #' @param new_data A named list of parameters to be updated/ patched.
+#' @param file_path A patch currently only important to patch an image a recorder endpoint.
 #' @return A `response` object from the httr2 package containing the API response.
 #' @examples
 #' \dontrun{
@@ -32,19 +33,27 @@ ecopi_error_body <- function(resp) {
 #' #
 #' }
 #' @import httr2
+#' @importFrom magrittr %>%
 #' @export
 
-ecopi_api <- function(resource, ..., params = list(), new_data=list()) {
+
+ecopi_api <- function(resource, ..., params = list(), new_data=list(), file_path) {
   params <- lapply(params, paste, collapse = ",")
   new_data <- lapply(new_data, paste, collapse = ",")
-  request("https://api.ecopi.de/api/v0.1") |>
-    req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
-    req_user_agent("ecopiapi") |>
-    req_error(body = ecopi_error_body) |>
-    req_template(resource, ...) |>
-    req_url_query(!!!params) |>
-    req_body_json(new_data) |> # neu eungefügt, wichtig für PATCH funktionen
-    req_perform()
+  req <- request("https://api.ecopi.de/api/v0.1") %>%
+    req_headers(Authorization = paste("Token", get_ecopiapi_key())) %>%
+    req_user_agent("ecopiapi") %>%
+    req_error(body = ecopi_error_body) %>%
+    req_template(resource, ...) %>%
+    req_url_query(!!!params) %>%
+    req_body_json(new_data) # neu eungefügt, wichtig für PATCH funktionen
+
+    if (missing(file_path)) {
+      req_perform(req)
+    } else {
+      req <- req_body_multipart(req, image= curl::form_file(file_path))
+      req_perform(req)
+    }  # neu eungefügt, wichtig für PATCH funktionen
 }
 
 
@@ -292,7 +301,7 @@ get_recorderlogs <- function(...) {
 #'
 #' @examples
 #' # Retrieve a list of recorders for project '017_neeri'
-#' get_recorders(project_name = "017_neeri")
+#' get_recorders(project_name = "017_neerach_ried")
 #'
 #' @return A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_list}.
 #'
@@ -302,6 +311,7 @@ get_recorders <- function(...) {
   ecopi_api("GET /recorders/", params = params) |>
     resp_body_json_to_df()
 }
+
 
 #' Get recorder info.
 #'
@@ -340,17 +350,18 @@ get_recorders <- function(...) {
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
 #' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "This a recorder ...", lat= 48)
+#' # OR with image
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "Teeeest ...", lat= 48, file_path = "/home/sample.jpeg")
 #'
 #' @return httr2_response
 #'
 #' @export
 
-patch_recorders <- function(..., recorder_name, new_data) {
+patch_recorders <- function(..., recorder_name, new_data, file_path) {
   # params = list(...)
   new_data= list(...)
-  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name= recorder_name, new_data = new_data)
+  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name= recorder_name, new_data = new_data, file_path=file_path)
 }
-
 
 
 
@@ -366,7 +377,7 @@ patch_recorders <- function(..., recorder_name, new_data) {
 #' get_recorderstates()
 #'
 #' # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-#' get_recorder_states(recorder_name = "00000000d76d0bf9")
+#' get_recorderstates(recorder_name = "00000000d76d0bf9")
 #'
 #' @return A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_list}.
 #'
