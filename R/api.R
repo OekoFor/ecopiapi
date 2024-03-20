@@ -24,7 +24,7 @@ ecopi_error_body <- function(resp) {
 #' @param ... Additional arguments to be passed to the req_template() function.
 #' @param params A named list of query parameters to include in the request.
 #' @param new_data A named list of parameters to be updated/ patched.
-#' @param file_path A patch currently only important to patch an image a recorder endpoint.
+#' @param file_path A path currently only important to patch an image to a recorder endpoint.
 #' @return A `response` object from the httr2 package containing the API response.
 #' @examples
 #' \dontrun{
@@ -47,14 +47,14 @@ ecopi_api <- function(resource, ..., params = list(), new_data=list(), file_path
     req_error(body = ecopi_error_body) %>%
     req_template(resource, ...) %>%
     req_url_query(!!!params) %>%
-    req_body_json(new_data) # neu eungefügt, wichtig für PATCH funktionen
+    req_body_json(new_data) # neu eungefügt, wichtig für PATCH Funktionen
 
     if (missing(file_path)) {
       req_perform(req)
     } else {
       req <- req_body_multipart(req, image= curl::form_file(file_path))
       req_perform(req)
-    }  # neu eungefügt, wichtig für PATCH funktionen
+    }  # neu eungefügt, wichtig für PATCH Funktionen
 }
 
 
@@ -185,8 +185,7 @@ get_projects <- function(...) {
 #' @export
 get_project_info <- function(project_name) {
   ecopi_api("GET /projects/{project_name}/",
-            project_name = project_name
-  ) |>
+            project_name = project_name) |>
     resp_body_json_to_df()
 }
 
