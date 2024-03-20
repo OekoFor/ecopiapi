@@ -38,7 +38,7 @@ ecopi_error_body <- function(resp) {
 #' @export
 
 
-ecopi_api <- function(resource, ..., params = list(), new_data=list(), file_path) {
+ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_path) {
   params <- lapply(params, paste, collapse = ",")
   new_data <- lapply(new_data, paste, collapse = ",")
   req <- request("https://api.ecopi.de/api/v0.1") %>%
@@ -49,12 +49,12 @@ ecopi_api <- function(resource, ..., params = list(), new_data=list(), file_path
     req_url_query(!!!params) %>%
     req_body_json(new_data) # neu eungefügt, wichtig für PATCH Funktionen
 
-    if (missing(file_path)) {
-      req_perform(req)
-    } else {
-      req <- req_body_multipart(req, image= curl::form_file(file_path))
-      req_perform(req)
-    }  # neu eungefügt, wichtig für PATCH Funktionen
+  if (missing(file_path)) {
+    req_perform(req)
+  } else {
+    req <- req_body_multipart(req, image = curl::form_file(file_path))
+    req_perform(req)
+  } # neu eungefügt, wichtig für PATCH Funktionen
 }
 
 
@@ -134,7 +134,7 @@ get_mediafile <- function(uid) {
 #'
 #' @export
 get_recordings <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recordings/", params = params) |>
     resp_body_json_to_df()
 }
@@ -160,7 +160,7 @@ get_recordings <- function(...) {
 #'
 #' @export
 get_projects <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /projects/", params = params) |>
     resp_body_json_to_df()
 }
@@ -185,7 +185,8 @@ get_projects <- function(...) {
 #' @export
 get_project_info <- function(project_name) {
   ecopi_api("GET /projects/{project_name}/",
-            project_name = project_name) |>
+    project_name = project_name
+  ) |>
     resp_body_json_to_df()
 }
 
@@ -208,7 +209,7 @@ get_project_info <- function(project_name) {
 #'
 #' @export
 get_recordergroups <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recordergroups/", params = params) |>
     resp_body_json_to_df()
 }
@@ -260,7 +261,7 @@ get_recordergroups <- function(...) {
 #'
 #' @export
 get_recorderlogs <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recorderlogs/", params = params) |>
     resp_body_json_to_df()
 }
@@ -307,7 +308,7 @@ get_recorderlogs <- function(...) {
 #'
 #' @export
 get_recorders <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recorders/", params = params) |>
     resp_body_json_to_df()
 }
@@ -349,9 +350,9 @@ get_recorders <- function(...) {
 #'
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
-#' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "This a recorder ...", lat= 48)
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "This a recorder ...", lat = 48)
 #' # OR with image
-#' patch_recorders(recorder_name = "00041aefd7jgg1014", description= "Teeeest ...", lat= 48, file_path = "/sample_path/sample.jpeg")
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")
 #'
 #' @return httr2_response
 #'
@@ -359,8 +360,8 @@ get_recorders <- function(...) {
 
 patch_recorders <- function(..., recorder_name, new_data, file_path) {
   # params = list(...)
-  new_data= list(...)
-  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name= recorder_name, new_data = new_data, file_path=file_path)
+  new_data <- list(...)
+  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name = recorder_name, new_data = new_data, file_path = file_path)
 }
 
 
@@ -383,7 +384,7 @@ patch_recorders <- function(..., recorder_name, new_data, file_path) {
 #'
 #' @export
 get_recorderstates <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recorderstates/", params = params) |>
     resp_body_json_to_df()
 }
@@ -407,7 +408,7 @@ get_recorderstates <- function(...) {
 #'
 #' @export
 get_recorderspeciescounts <- function(project_name, ...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/", project_name = project_name, params = params) |>
     resp_body_json_to_df()
 }
