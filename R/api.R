@@ -8,6 +8,7 @@
 #' error_body <- ecopi_error_body(response)
 #' }
 #' @export
+
 ecopi_error_body <- function(resp) {
   resp |>
     httr2::resp_body_json() |>
@@ -22,6 +23,8 @@ ecopi_error_body <- function(resp) {
 #' @param resource A character string specifying the API resource to request.
 #' @param ... Additional arguments to be passed to the req_template() function.
 #' @param params A named list of query parameters to include in the request.
+#' @param new_data A named list of parameters to be updated/ patched.
+#' @param file_path A path currently only important to patch an image to a recorder endpoint.
 #' @return A `response` object from the httr2 package containing the API response.
 #' @examples
 #' \dontrun{
@@ -33,16 +36,27 @@ ecopi_error_body <- function(resp) {
 #' @import httr2
 #' @export
 
-ecopi_api <- function(resource, ..., params = list()) {
+
+ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_path) {
   params <- lapply(params, paste, collapse = ",")
-  request("https://api.ecopi.de/api/v0.1") |>
+  new_data <- lapply(new_data, paste, collapse = ",")
+  req <- request("https://api.ecopi.de/api/v0.1") |>
     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
     req_user_agent("ecopiapi") |>
     req_error(body = ecopi_error_body) |>
     req_template(resource, ...) |>
     req_url_query(!!!params) |>
-    req_perform()
+    req_body_json(new_data) # neu eungefügt, wichtig für PATCH Funktionen
+
+  if (missing(file_path)) {
+    req_perform(req)
+  } else {
+    req <- req_body_multipart(req, image = curl::form_file(file_path))
+    req_perform(req)
+  } # neu eungefügt, wichtig für PATCH Funktionen
 }
+
+
 
 #' Convert response body to data frame
 #'
@@ -113,13 +127,13 @@ get_mediafile <- function(uid) {
 #'
 #' @examples
 #' # Retrieve a list of recordings for project '017_neeri' that occurred in March (month=3)
-#' get_recordings(project_name = "017_neeri", datetime__month = 3))
+#' get_recordings(project_name = "017_neeri", datetime__month = 3)
 #'
 #' @return A data.frame containing the recordings that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docs/#operation/recordings_list)
 #'
 #' @export
 get_recordings <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recordings/", params = params) |>
     resp_body_json_to_df()
 }
@@ -145,7 +159,7 @@ get_recordings <- function(...) {
 #'
 #' @export
 get_projects <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /projects/", params = params) |>
     resp_body_json_to_df()
 }
@@ -170,7 +184,7 @@ get_projects <- function(...) {
 #' @export
 get_project_info <- function(project_name) {
   ecopi_api("GET /projects/{project_name}/",
-            project_name = project_name
+    project_name = project_name
   ) |>
     resp_body_json_to_df()
 }
@@ -194,7 +208,7 @@ get_project_info <- function(project_name) {
 #'
 #' @export
 get_recordergroups <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recordergroups/", params = params) |>
     resp_body_json_to_df()
 }
@@ -246,7 +260,7 @@ get_recordergroups <- function(...) {
 #'
 #' @export
 get_recorderlogs <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recorderlogs/", params = params) |>
     resp_body_json_to_df()
 }
@@ -287,16 +301,17 @@ get_recorderlogs <- function(...) {
 #'
 #' @examples
 #' # Retrieve a list of recorders for project '017_neeri'
-#' get_recorders(project_name = "017_neeri")
+#' get_recorders(project_name = "017_neerach_ried")
 #'
 #' @return A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_list}.
 #'
 #' @export
 get_recorders <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recorders/", params = params) |>
     resp_body_json_to_df()
 }
+
 
 #' Get recorder info.
 #'
@@ -324,6 +339,32 @@ get_recorders <- function(...) {
 
 
 
+
+#' PATCH recorder parameters.
+#'
+#' Wrapper around the 'DetailView Recorder' endpoint to update recorders parameters based on the specified body schema.
+#'
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_partial_update}.
+#' @param recorder_name The name of the recorder to update information from.
+#'
+#' @examples
+#' # Update the parameter description of the recorder 00041aefd7jgg1014
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "This a recorder ...", lat = 48)
+#' # OR with image
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")
+#'
+#' @return httr2_response
+#'
+#' @export
+
+patch_recorders <- function(..., recorder_name, new_data, file_path) {
+  # params = list(...)
+  new_data <- list(...)
+  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name = recorder_name, new_data = new_data, file_path = file_path)
+}
+
+
+
 # Recorderstates --------------------------------------------------------------------------------------------------
 #' Get recorder states list.
 #'
@@ -336,13 +377,13 @@ get_recorders <- function(...) {
 #' get_recorderstates()
 #'
 #' # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-#' get_recorder_states(recorder_name = "00000000d76d0bf9")
+#' get_recorderstates(recorder_name = "00000000d76d0bf9")
 #'
 #' @return A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_list}.
 #'
 #' @export
 get_recorderstates <- function(...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /recorderstates/", params = params) |>
     resp_body_json_to_df()
 }
@@ -366,7 +407,7 @@ get_recorderstates <- function(...) {
 #'
 #' @export
 get_recorderspeciescounts <- function(project_name, ...) {
-  params = list(...)
+  params <- list(...)
   ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/", project_name = project_name, params = params) |>
     resp_body_json_to_df()
 }

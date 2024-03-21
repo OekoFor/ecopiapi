@@ -2,35 +2,24 @@
 % Please edit documentation in R/api.R
 \name{get_recorderstates}
 \alias{get_recorderstates}
-\title{Get recorder info.}
+\title{Get recorder states list.}
 \usage{
 get_recorderstates(...)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorderstates_list}}
-
-\item{recorder_name}{The name of the recorder to retrieve information about.}
 }
 \value{
-A list containing information about the specified recorder: \url{https://api.ecopi.de/api/docs/#operation/recorders_read}.
-
 A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_list}.
 }
 \description{
-Wrapper around the 'recorders_read' endpoint to retrieve information about a specific recorder.
-}
-\details{
-This function retrieves information about a specific recorder, based on the recorder name provided in the 'recorder_name' parameter.
-The available information about a recorder is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recorders_read}.
+Wrapper around the 'ListView RecorderStates' endpoint to retrieve a list of recorder states based on the specified query parameters.
 }
 \examples{
-# Retrieve information about the recorder '00000000d76d0bf9'
-get_recorderinfo(recorder_name = "00000000d76d0bf9")
-
 # Retrieve all recorder states
 get_recorderstates()
 
 # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-get_recorder_states(recorder_name = "00000000d76d0bf9")
+get_recorderstates(recorder_name = "00000000d76d0bf9")
 
 }

@@ -28,6 +28,6 @@ The available information about a recorder log is documented in the EcoPi API do
 get_recorderlog_info(recorder_name = "00000000d76d0bf9")
 
 # Retrieve a list of recorders for project '017_neeri'
-get_recorders(project_name = "017_neeri")
+get_recorders(project_name = "017_neerach_ried")
 
 }
