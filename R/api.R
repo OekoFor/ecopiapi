@@ -34,19 +34,18 @@ ecopi_error_body <- function(resp) {
 #' #
 #' }
 #' @import httr2
-#' @importFrom magrittr %>%
 #' @export
 
 
 ecopi_api <- function(resource, ..., params = list(), new_data=list(), file_path) {
   params <- lapply(params, paste, collapse = ",")
   new_data <- lapply(new_data, paste, collapse = ",")
-  req <- request("https://api.ecopi.de/api/v0.1") %>%
-    req_headers(Authorization = paste("Token", get_ecopiapi_key())) %>%
-    req_user_agent("ecopiapi") %>%
-    req_error(body = ecopi_error_body) %>%
-    req_template(resource, ...) %>%
-    req_url_query(!!!params) %>%
+  req <- request("https://api.ecopi.de/api/v0.1") |>
+    req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
+    req_user_agent("ecopiapi") |>
+    req_error(body = ecopi_error_body) |>
+    req_template(resource, ...) |>
+    req_url_query(!!!params) |>
     req_body_json(new_data) # neu eungefügt, wichtig für PATCH Funktionen
 
     if (missing(file_path)) {
