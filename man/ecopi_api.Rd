@@ -15,7 +15,7 @@ ecopi_api(resource, ..., params = list(), new_data = list(), file_path)
 
 \item{new_data}{A named list of parameters to be updated/ patched.}
 
-\item{file_path}{A patch currently only important to patch an image a recorder endpoint.}
+\item{file_path}{A path currently only important to patch an image to a recorder endpoint.}
 }
 \value{
 A \code{response} object from the httr2 package containing the API response.
