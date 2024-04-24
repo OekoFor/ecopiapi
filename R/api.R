@@ -108,7 +108,7 @@ get_detections <- function(...) {
 #'
 #' @examples
 #' # Update the parameter confirmed of an example detection
-#' patch_detections(detection_id=123, datetime__month = 3)
+#' patch_detections(id_or_uid="64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed= "yes")
 #'
 #' @return httr2_response
 #'
@@ -120,8 +120,6 @@ patch_detections <- function(...,id_or_uid, new_data) {
   ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = new_data)
 }
 
-# Test it
-# patch_detections(id_or_uid="64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed= "yes")
 
 
 #' Get media file.
