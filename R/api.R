@@ -98,6 +98,30 @@ get_detections <- function(...) {
     resp_body_json_to_df()
 }
 
+
+
+#' PATCH detection
+#'
+#' Wrapper around the 'ListView Detections' endpoint to update detections parameters based on the specified query parameters.
+#'
+#' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)
+#'
+#' @examples
+#' # Update the parameter confirmed of an example detection
+#' patch_detections(id_or_uid="64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed= "yes")
+#'
+#' @return httr2_response
+#'
+#' @export
+
+patch_detections <- function(...,id_or_uid, new_data) {
+  #params <- list(...)
+  new_data <- list(...)
+  ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = new_data)
+}
+
+
+
 #' Get media file.
 #'
 #' Wrapper around the 'MediaFile Detection' endpoint to retrieve a media file from a detection.
@@ -349,7 +373,7 @@ get_recorders <- function(...) {
 #'
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
-#' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "This a recorder ...", lat = 48)
+#' patch_recorders(recorder_name = "008041aefd7ee1015", description = "This a recorder ...", lat = 48)
 #' # OR with image
 #' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")
 #'
