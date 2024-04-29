@@ -108,14 +108,14 @@ get_detections <- function(...) {
 #'
 #' @examples
 #' # Update the parameter confirmed of an example detection
-#' patch_detections(id_or_uid="64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed= "yes")
+#' patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "yes")
 #'
 #' @return httr2_response
 #'
 #' @export
 
-patch_detections <- function(...,id_or_uid, new_data) {
-  #params <- list(...)
+patch_detections <- function(..., id_or_uid, new_data) {
+  # params <- list(...)
   new_data <- list(...)
   ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = new_data)
 }
