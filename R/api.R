@@ -238,6 +238,27 @@ get_recordergroups <- function(...) {
 }
 
 
+#' PATCH recordergroups
+#'
+#' Wrapper around the 'DetailView RecorderGroup' endpoint to update recordergroups parameters based on the specified query parameters.
+#'
+#' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)
+#'
+#' @examples
+#' # Update the parameter confirmed of an example detection
+#' patch_recordergroups(id = "44", description="patch test")
+#'
+#' @return httr2_response
+#'
+#' @export
+
+patch_recordergroups <- function(..., id, new_data) {
+  # params <- list(...)
+  new_data <- list(...)
+  ecopi_api("PATCH /recordergroups/{id}/", id= id, new_data = new_data)
+}
+
+
 #' Get recorder group info.
 #'
 #' Wrapper around the 'recordergroups_read' endpoint to retrieve information about a specific recorder group.
