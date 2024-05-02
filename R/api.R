@@ -189,6 +189,29 @@ get_projects <- function(...) {
 }
 
 
+#' Get historical projects list.
+#'
+#' Wrapper around the 'ListView historicalprojects' endpoint to retrieve a list of historical projects based on the specified query parameters.
+#'
+#' @param ... query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/historicalprojects_list)
+#'
+#' @examples
+#' # retrieve a dataframe of all historical projects
+#' get_historicalprojects()
+#'
+#' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
+#' get_historicalprojects(project_name__in = "red_panda, green_banana")
+#'
+#' @return A dataframe containing the historical projects that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalprojects_list}.
+#'
+#' @export
+get_historicalprojects <- function(...) {
+  params <- list(...)
+  ecopi_api("GET /historicalprojects/", params = params) |>
+    resp_body_json_to_df()
+}
+
+
 #' Get project info.
 #'
 #' Wrapper around the 'projects_read' endpoint to retrieve information about a specific project.
@@ -234,6 +257,27 @@ get_project_info <- function(project_name) {
 get_recordergroups <- function(...) {
   params <- list(...)
   ecopi_api("GET /recordergroups/", params = params) |>
+    resp_body_json_to_df()
+}
+
+
+#' Get historical recorder groups list.
+#'
+#' Wrapper around the 'ListView historicalrecordergroups' endpoint to retrieve a list of recorder groups based on the specified query parameters.
+#' This contains the configurations and species list
+#'
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalrecordergroups_list}.
+#'
+#' @examples
+#' # Retrieve a data frame of historical recorder groups for project 'oekofor'
+#' get_historicalrecordergroups(project_name = "oekofor")
+#'
+#' @return A list containing the historical recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalrecordergroups_list}.
+#'
+#' @export
+get_historicalrecordergroups <- function(...) {
+  params <- list(...)
+  ecopi_api("GET /historicalrecordergroups/", params = params) |>
     resp_body_json_to_df()
 }
 
@@ -333,6 +377,26 @@ get_recorderlogs <- function(...) {
 get_recorders <- function(...) {
   params <- list(...)
   ecopi_api("GET /recorders/", params = params) |>
+    resp_body_json_to_df()
+}
+
+
+#' Get historical recorders list.
+#'
+#' Wrapper around the 'ListView historicalrecorders' endpoint to retrieve a list of recorders based on the specified query parameters.
+#'
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalrecorders_list}.
+#'
+#' @examples
+#' # Retrieve a list of historical recorders for project '017_neeri'
+#' get_historicalrecorders(project_name = "017_neerach_ried")
+#'
+#' @return A dataframe containing the historical recorders that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalrecorders_list}.
+#'
+#' @export
+get_historicalrecorders <- function(...) {
+  params <- list(...)
+  ecopi_api("GET /historicalrecorders/", params = params) |>
     resp_body_json_to_df()
 }
 
