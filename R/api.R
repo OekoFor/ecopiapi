@@ -499,3 +499,60 @@ get_recorderspeciescounts <- function(project_name, ...) {
   ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/", project_name = project_name, params = params) |>
     resp_body_json_to_df()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
+## Links in django endpoints testen
+# zum Testen devtools:load_all IN CONSOLE dann den rest auskommentoeren
+# hat mit flos lokalem server funktionert
+# später evtl "http://192.168.10.31:8000" wieder auf stellen https://api.ecopi.de/api/v0.1"
+
+# ecopi_api2 <- function(resource, ..., params = list()) {
+#   request("http://192.168.10.31:8000") |>
+#     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
+#     req_user_agent("ecopiapi") |>
+#     req_error(body = ecopi_error_body) |>
+#     req_template(resource, ...) |>
+#     req_url_query(!!!params) |>
+#     req_perform() |>
+#     resp_body_json_to_df()
+# }
+#
+# get_api <- function(...) {
+#   params <- list(...)
+#   ecopi_api2("GET /api/versions")
+# }
+#
+# a <- get_api()
+# a$versions$url
+#
+#
+# get_url <- function(resource, ..., params = list(), url) {
+#   request(url) |>
+#     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
+#     req_user_agent("ecopiapi") |>
+#     req_error(body = ecopi_error_body) |>
+#     # req_template(resource, ...) |>
+#     req_url_query(!!!params) |>
+#     req_perform() |>
+#     resp_body_json_to_df()
+# }
+#
+# get_url(url = "http://192.168.10.31:8000/api/versions/")
+# get_url(url = a$versions$url)
+
