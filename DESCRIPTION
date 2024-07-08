@@ -1,6 +1,6 @@
 Package: ecopiapi
 Title: R package to interact with the ecopi API
-Version: 0.1.0
+Version: 0.1.2.9000
 Authors@R:
     person("Felix" , "Guenther", , "guenther@oekofor.de", role = c("aut", "cre"))
 Description: Get, post, patch data from the ecop API.
@@ -13,4 +13,8 @@ URL: https://github.com/OekoFor/ecopiapi
 BugReports: https://github.com/OekoFor/ecopiapi/issues
 Imports: 
     data.table,
-    httr2
+    httr2,
+    stringr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
