@@ -399,9 +399,8 @@ get_historicalrecorders <- function(...) {
 #' @export
 
 patch_recorders <- function(..., recorder_name, file_path) {
-  # params = list(...)
-  new_data <- list(...)
-  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name = recorder_name, new_data = new_data, file_path = file_path)
+  params = list(...)
+  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name = recorder_name, new_data = params, file_path = file_path)
 }
 
 
