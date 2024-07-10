@@ -20,6 +20,8 @@ This function retrieves information about a specific project, based on the proje
 }
 \examples{
 # Retrieve information about the '017_neeri' project
-\dontrun{get_project_info(project_name = "017_neeri")}
+\dontrun{
+get_project_info(project_name = "017_neeri")
+}
 
 }

@@ -24,6 +24,6 @@ post_detection(
   end = 4,
   species_code = "Frosch",
   confidence = -1
-  )
+)
 }
 }

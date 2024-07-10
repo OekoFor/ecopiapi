@@ -21,8 +21,12 @@ Wrapper around the 'recorders_partial_update' endpoint to update recorders param
 }
 \examples{
 # Update the parameter description of the recorder 00041aefd7jgg1014
-\dontrun{patch_recorders(recorder_name = "008041aefd7ee1015", description = "This a recorder ...", lat = 48)}
+\dontrun{
+patch_recorders(recorder_name = "008041aefd7ee1015", description = "This a recorder ...", lat = 48)
+}
 # OR with image
-\dontrun{patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")}
+\dontrun{
+patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")
+}
 
 }

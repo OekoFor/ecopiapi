@@ -17,9 +17,13 @@ Wrapper around the 'recorderstates_list' endpoint to retrieve a list of recorder
 }
 \examples{
 # Retrieve all recorder states
-\dontrun{get_recorderstates()}
+\dontrun{
+get_recorderstates()
+}
 
 # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-\dontrun{get_recorderstates(recorder_name = "00000000d76d0bf9")}
+\dontrun{
+get_recorderstates(recorder_name = "00000000d76d0bf9")
+}
 
 }

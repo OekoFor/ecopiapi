@@ -21,6 +21,8 @@ Wrapper around the 'detections_partial_update' endpoint to update detections par
 }
 \examples{
 # Update the parameter confirmed of an example detection
-\dontrun{patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")}
+\dontrun{
+patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")
+}
 
 }
