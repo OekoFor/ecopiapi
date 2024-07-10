@@ -16,6 +16,8 @@ object of type "httr2_response". contains raw data in body (currently audio or i
 Wrapper around the 'detections_media_retrieve' endpoint to retrieve a media file from a detection.
 }
 \examples{
-\dontrun{get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")}
+\dontrun{
+get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")
+}
 
 }

@@ -19,9 +19,13 @@ Wrapper around the 'meta_project_detections_recorderspeciescounts_retrieve' endp
 }
 \examples{
 # Retrieve a count pre species and recorders. By default, the count is returned for today
-\dontrun{get_recorderspeciescounts(project_name = "039_zitro")}
+\dontrun{
+get_recorderspeciescounts(project_name = "039_zitro")
+}
 # You can specify a start_date and end_date to get a count for specific time interval.
 # Limit 'countable' detections by setting a confidence threshold
-\dontrun{get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)}
+\dontrun{
+get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)
+}
 
 }

@@ -17,6 +17,8 @@ Wrapper around the 'recorderlogs_list' endpoint to retrieve a list of recorder l
 }
 \examples{
 # Retrieve a dataframe of recorder logs for project '017_neeri'
-\dontrun{get_recorderlogs(project_name = "017_neeri")}
+\dontrun{
+get_recorderlogs(project_name = "017_neeri")
+}
 
 }

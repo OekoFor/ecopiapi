@@ -17,8 +17,8 @@ Wrapper around the 'detections_list' endpoint to retrieve a list of detections b
 }
 \examples{
 # Retrieve a list of detections for project '017_neeri' that occurred in March (month=3)
- \dontrun{
- get_detections(project_name = "017_neeri", datetime__month = 3)
- }
+\dontrun{
+get_detections(project_name = "017_neeri", datetime__month = 3)
+}
 
 }

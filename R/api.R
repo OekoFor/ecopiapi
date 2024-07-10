@@ -51,7 +51,8 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
   if (missing(file_path)) {
     req_perform(req)
   } else {
-    req <- req_body_multipart(req, image = curl::form_file(file_path))
+    media <- curl::form_file(file_path)
+    req <- req_body_multipart(req, image = media, media = media)
     req_perform(req)
   } # neu eungefügt, wichtig für PATCH Funktionen
 }
@@ -101,6 +102,34 @@ get_detections <- function(...) {
 }
 
 
+#' Post a new detection
+#'
+#' Wrapper around the 'detections_create' endpoint.
+#' If you want to create a new detection and include a media file, you need to do it in two steps.
+#' First create the detection using `post_detection()` and then upload the mediafile with `patch_detections()`
+#' TIP: Assigning your own uuid before posting makes it easier to patch a file.
+#'
+#' @param ... Find required parameters here \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_create}
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' post_detection(
+#'   recorder_name = "000000002e611dde",
+#'   datetime = lubridate::now() |> lubridate::with_tz(tzone = "UTC") |> format("%Y-%m-%dT%H:%M:%S") |> paste0("Z") |> as.character(), # lubridate::now(tzone = "UTC") |> format("%Y-%m-%dT%H:%M:%S%Z") |> as.character(), # "2019-08-24T14:15:22Z",
+#'   start = 1,
+#'   end = 4,
+#'   species_code = "Frosch",
+#'   confidence = -1
+#' )
+#' }
+post_detection <- function(...) {
+  params <- list(...)
+  ecopi_api("POST /detections/", new_data = params)
+}
+
 
 #' PATCH detection
 #'
@@ -108,6 +137,7 @@ get_detections <- function(...) {
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_partial_update}
 #' @param id_or_uid The database ID or UID of the respective detection
+#' @param file_path Path to file to upload
 #'
 #' @examples
 #' # Update the parameter confirmed of an example detection
@@ -119,9 +149,9 @@ get_detections <- function(...) {
 #'
 #' @export
 
-patch_detections <- function(..., id_or_uid) {
+patch_detections <- function(..., id_or_uid, file_path) {
   params <- list(...)
-  ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = params)
+  ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = params, file_path = file_path)
 }
 
 
@@ -398,10 +428,9 @@ get_historicalrecorders <- function(...) {
 #'
 #' @export
 
-patch_recorders <- function(..., recorder_name, new_data, file_path) {
-  # params = list(...)
-  new_data <- list(...)
-  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name = recorder_name, new_data = new_data, file_path = file_path)
+patch_recorders <- function(..., recorder_name, file_path) {
+  params = list(...)
+  ecopi_api("PATCH /recorders/{recorder_name}/", recorder_name = recorder_name, new_data = params, file_path = file_path)
 }
 
 

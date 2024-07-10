@@ -17,6 +17,8 @@ Wrapper around the 'historicalrecorders_list' endpoint to get a list of recorder
 }
 \examples{
 # Retrieve a list of historical recorders for project '017_neeri'
-\dontrun{get_historicalrecorders(project_name = "017_neerach_ried")}
+\dontrun{
+get_historicalrecorders(project_name = "017_neerach_ried")
+}
 
 }
