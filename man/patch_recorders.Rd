@@ -4,7 +4,7 @@
 \alias{patch_recorders}
 \title{PATCH recorder.}
 \usage{
-patch_recorders(..., recorder_name, new_data, file_path)
+patch_recorders(..., recorder_name, file_path)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_partial_update}.}

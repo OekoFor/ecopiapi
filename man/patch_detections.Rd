@@ -4,12 +4,14 @@
 \alias{patch_detections}
 \title{PATCH detection}
 \usage{
-patch_detections(..., id_or_uid)
+patch_detections(..., id_or_uid, file_path)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_partial_update}}
 
 \item{id_or_uid}{The database ID or UID of the respective detection}
+
+\item{file_path}{Path to file to upload}
 }
 \value{
 httr2_response
