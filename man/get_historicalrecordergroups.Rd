@@ -7,13 +7,13 @@
 get_historicalrecordergroups(...)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalrecordergroups_list}.}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecordergroups_list}.}
 }
 \value{
-A list containing the historical recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalrecordergroups_list}.
+A list containing the historical recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecordergroups_list}.
 }
 \description{
-Wrapper around the 'ListView historicalrecordergroups' endpoint to retrieve a list of recorder groups based on the specified query parameters.
+Wrapper around the 'historicalrecordergroups_list' endpoint to retrieve a list of recorder groups based on the specified query parameters.
 This contains the configurations and species list
 }
 \examples{

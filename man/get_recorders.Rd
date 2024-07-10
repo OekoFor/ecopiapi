@@ -7,21 +7,26 @@
 get_recorders(...)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_list}.}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_list}.}
 
 \item{recorder_name}{The name of the recorder to retrieve information about.}
 }
 \value{
-A list containing information about the specified recorder log: \url{https://api.ecopi.de/api/docs/#operation/recorderlogs_read}.
+A list containing information about the specified recorder log: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderlogs_retrieve}.
 
-A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorders_list}.
+TODO export function
+Get recorders list.
+
+Wrapper around the 'recorders_list' endpoint to retrieve a list of recorders based on the specified query parameters.
+
+A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_list}.
 }
 \description{
 Wrapper around the 'recorderlogs_read' endpoint to retrieve information about a specific recorder log.
 }
 \details{
 This function retrieves information about a specific recorder log, based on the recorder name provided in the 'recorder_name' parameter.
-The available information about a recorder log is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recorderlogs_read}.
+The available information about a recorder log is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderlogs_retrieve}.
 }
 \examples{
 # Retrieve information about the recorder log for recorder '00000000d76d0bf9'

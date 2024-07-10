@@ -7,13 +7,13 @@
 get_historicalprojects(...)
 }
 \arguments{
-\item{...}{query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/historicalprojects_list)}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalprojects_list}}
 }
 \value{
-A dataframe containing the historical projects that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docs/#operation/historicalprojects_list}.
+A dataframe containing the historical projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalprojects_list}.
 }
 \description{
-Wrapper around the 'ListView historicalprojects' endpoint to retrieve a list of historical projects based on the specified query parameters.
+Wrapper around the 'historicalprojects_list' endpoint to retrieve a list of historical projects based on the specified query parameters.
 }
 \examples{
 # retrieve a dataframe of all historical projects

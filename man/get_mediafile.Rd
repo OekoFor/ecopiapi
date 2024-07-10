@@ -7,13 +7,13 @@
 get_mediafile(uid)
 }
 \arguments{
-\item{uid}{uid of that specifiy detection. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_media_read)}
+\item{uid}{uid of that specifiy detection. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_media_retrieve}}
 }
 \value{
 object of type "httr2_response". contains raw data in body (currently audio or image)
 }
 \description{
-Wrapper around the 'MediaFile Detection' endpoint to retrieve a media file from a detection.
+Wrapper around the 'detections_media_retrieve' endpoint to retrieve a media file from a detection.
 }
 \examples{
 get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")

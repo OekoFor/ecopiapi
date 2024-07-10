@@ -4,19 +4,19 @@
 \alias{patch_detections}
 \title{PATCH detection}
 \usage{
-patch_detections(..., id_or_uid, new_data)
+patch_detections(..., id_or_uid)
 }
 \arguments{
-\item{...}{query paramaters. See \url(https://api.ecopi.de/api/v0.1/docs/#operation/detections_list)}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_partial_update}}
 }
 \value{
 httr2_response
 }
 \description{
-Wrapper around the 'ListView Detections' endpoint to update detections parameters based on the specified query parameters.
+Wrapper around the 'detections_partial_update' endpoint to update detections parameters based on the specified query parameters.
 }
 \examples{
 # Update the parameter confirmed of an example detection
-patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "yes")
+patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")
 
 }

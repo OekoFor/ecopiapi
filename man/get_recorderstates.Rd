@@ -7,13 +7,13 @@
 get_recorderstates(...)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/v0.1/docs/#operation/recorderstates_list}}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderstates_list}}
 }
 \value{
-A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#operation/recorderstates_list}.
+A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderstates_list}.
 }
 \description{
-Wrapper around the 'ListView RecorderStates' endpoint to retrieve a list of recorder states based on the specified query parameters.
+Wrapper around the 'recorderstates_list' endpoint to retrieve a list of recorder states based on the specified query parameters.
 }
 \examples{
 # Retrieve all recorder states
