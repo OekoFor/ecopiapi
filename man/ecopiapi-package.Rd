@@ -12,6 +12,7 @@ Get, post, patch data from the ecop API.
 Useful links:
 \itemize{
   \item \url{https://github.com/OekoFor/ecopiapi}
+  \item \url{https://oekofor.github.io/ecopiapi/}
   \item Report bugs at \url{https://github.com/OekoFor/ecopiapi/issues}
 }
 

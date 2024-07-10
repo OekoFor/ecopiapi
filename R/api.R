@@ -87,7 +87,9 @@ resp_body_json_to_df <- function(api_response) {
 #'
 #' @examples
 #' # Retrieve a list of detections for project '017_neeri' that occurred in March (month=3)
-#' get_detections(project_name = "017_neeri", datetime__month = 3)
+#'  \dontrun{
+#'  get_detections(project_name = "017_neeri", datetime__month = 3)
+#'  }
 #'
 #' @return A data.frame containing the detections that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_list}
 #'
@@ -105,10 +107,11 @@ get_detections <- function(...) {
 #' Wrapper around the 'detections_partial_update' endpoint to update detections parameters based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_partial_update}
+#' @param id_or_uid The database ID or UID of the respective detection
 #'
 #' @examples
 #' # Update the parameter confirmed of an example detection
-#' patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")
+#' \dontrun{patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")}
 #'
 #' @return httr2_response
 #'
@@ -128,7 +131,7 @@ patch_detections <- function(..., id_or_uid) {
 #' @param uid uid of that specifiy detection. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_media_retrieve}
 #'
 #' @examples
-#' get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")
+#' \dontrun{get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")}
 #'
 #' @return object of type "httr2_response". contains raw data in body (currently audio or image)
 #'
@@ -150,7 +153,7 @@ get_mediafile <- function(uid) {
 #'
 #' @examples
 #' # Retrieve a list of recordings for project '017_neeri' that occurred in March (month=3)
-#' get_recordings(project_name = "017_neeri", datetime__month = 3)
+#' \dontrun{get_recordings(project_name = "017_neeri", datetime__month = 3)}
 #'
 #' @return A data.frame containing the recordings that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recordings_list}
 #'
@@ -173,10 +176,10 @@ get_recordings <- function(...) {
 #'
 #' @examples
 #' # retrieve a dataframe of all projects
-#' get_projects()
+#' \dontrun{get_projects()}
 #'
 #' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-#' get_projects(project_name__in = "red_panda, green_banana")
+#' \dontrun{get_projects(project_name__in = "red_panda, green_banana")}
 #'
 #' @return A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.
 #'
@@ -196,10 +199,10 @@ get_projects <- function(...) {
 #'
 #' @examples
 #' # retrieve a dataframe of all historical projects
-#' get_historicalprojects()
+#' \dontrun{get_historicalprojects()}
 #'
 #' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-#' get_historicalprojects(project_name__in = "red_panda, green_banana")
+#' \dontrun{get_historicalprojects(project_name__in = "red_panda, green_banana")}
 #'
 #' @return A dataframe containing the historical projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalprojects_list}.
 #'
@@ -215,11 +218,11 @@ get_historicalprojects <- function(...) {
 #'
 #' Wrapper around the 'projects_retrieve' endpoint to retrieve information about a specific project.
 #'
-#' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.
+#' @param project_name Name of the project.
 #'
 #' @examples
 #' # Retrieve information about the '017_neeri' project
-#' get_project_info(project_name = "017_neeri")
+#' \dontrun{get_project_info(project_name = "017_neeri")}
 #'
 #' @details
 #' This function retrieves information about a specific project, based on the project name provided in the 'project_name' parameter.
@@ -247,7 +250,7 @@ get_project_info <- function(project_name) {
 #'
 #' @examples
 #' # Retrieve a data frame of recorder groups for project 'oekofor'
-#' get_recordergroups(project_name = "oekofor")
+#' \dontrun{get_recordergroups(project_name = "oekofor")}
 #'
 #' @return A list containing the recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recordergroups_list}.
 #'
@@ -268,7 +271,7 @@ get_recordergroups <- function(...) {
 #'
 #' @examples
 #' # Retrieve a data frame of historical recorder groups for project 'oekofor'
-#' get_historicalrecordergroups(project_name = "oekofor")
+#' \dontrun{get_historicalrecordergroups(project_name = "oekofor")}
 #'
 #' @return A list containing the historical recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecordergroups_list}.
 #'
@@ -279,34 +282,6 @@ get_historicalrecordergroups <- function(...) {
     resp_body_json_to_df()
 }
 
-
-#' Get recorder group info.
-#'
-#' Wrapper around the 'recordergroups_retrieve' endpoint to retrieve information about a specific recorder group.
-#' @noRd
-#' @param project_name The name of the project that the recorder group belongs to.
-#' @param recordergroup_name The name of the recorder group to retrieve information about.
-#'
-#' @examples
-#' # Retrieve information about the 'default' recorder group for project 'oekofor'
-#' get_recordergroup_info(project_name = "oekofor", recordergroup_name = "default")
-#'
-#' @details
-#' This function retrieves information about a specific recorder group, based on the project name and recorder group name provided in the 'project_name' and 'recordergroup_name' parameters, respectively.
-#' The available information about a recorder group is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recordergroups_read}.
-#'
-#' @return A list containing information about the specified recorder group: \url{https://api.ecopi.de/api/docs/#operation/recordergroups_read}.
-#'
-#' TODO export function
-# get_recordergroup_info <-
-#   function(project_name, recordergroup_name) {
-#     ecopi_api(
-#       "GET /recordergroups/{project_name}/{recordergroup_name}/",
-#       project_name = project_name,
-#       recordergroup_name = recordergroup_name
-#     ) |>
-#       resp_body_json_to_df()
-#   }
 
 
 # Logs ------------------------------------------------------------------------------------------------------------
@@ -320,7 +295,7 @@ get_historicalrecordergroups <- function(...) {
 #'
 #' @examples
 #' # Retrieve a dataframe of recorder logs for project '017_neeri'
-#' get_recorderlogs(project_name = "017_neeri")
+#' \dontrun{get_recorderlogs(project_name = "017_neeri")}
 #'
 #' @return A dataframe containing the recorder logs that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderlogs_list}.
 #'
@@ -330,31 +305,6 @@ get_recorderlogs <- function(...) {
   ecopi_api("GET /recorderlogs/", params = params) |>
     resp_body_json_to_df()
 }
-
-#' Get recorder log info.
-#'
-#' Wrapper around the 'recorderlogs_read' endpoint to retrieve information about a specific recorder log.
-#'
-#' @param recorder_name The name of the recorder to retrieve information about.
-#'
-#' @examples
-#' # Retrieve information about the recorder log for recorder '00000000d76d0bf9'
-#' get_recorderlog_info(recorder_name = "00000000d76d0bf9")
-#'
-#' @details
-#' This function retrieves information about a specific recorder log, based on the recorder name provided in the 'recorder_name' parameter.
-#' The available information about a recorder log is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderlogs_retrieve}.
-#'
-#' @return A list containing information about the specified recorder log: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderlogs_retrieve}.
-#'
-#' TODO export function
-# get_recorder_log_info <- function(recorder_name) {
-#   ecopi_api("GET /recorderlogs/{recorder_name}/",
-#     recorder_name = recorder_name
-#   ) |>
-#     resp_body_json_to_df()
-# }
-
 
 
 # Recorders -------------------------------------------------------------------------------------------------------
@@ -367,7 +317,7 @@ get_recorderlogs <- function(...) {
 #'
 #' @examples
 #' # Retrieve a list of recorders for project '017_neeri'
-#' get_recorders(project_name = "017_neerach_ried")
+#' \dontrun{get_recorders(project_name = "017_neerach_ried")}
 #'
 #' @return A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_list}.
 #'
@@ -387,7 +337,7 @@ get_recorders <- function(...) {
 #'
 #' @examples
 #' # Retrieve a list of historical recorders for project '017_neeri'
-#' get_historicalrecorders(project_name = "017_neerach_ried")
+#' \dontrun{get_historicalrecorders(project_name = "017_neerach_ried")}
 #'
 #' @return A dataframe containing the historical recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecorders_list}.
 #'
@@ -399,33 +349,6 @@ get_historicalrecorders <- function(...) {
 }
 
 
-#' Get recorder info.
-#'
-#' Wrapper around the 'recorders_read' endpoint to retrieve information about a specific recorder.
-#' @noRd
-
-#' @param recorder_name The name of the recorder to retrieve information about.
-#'
-#' @examples
-#' # Retrieve information about the recorder '00000000d76d0bf9'
-#' get_recorderinfo(recorder_name = "00000000d76d0bf9")
-#'
-#' @details
-#' This function retrieves information about a specific recorder, based on the recorder name provided in the 'recorder_name' parameter.
-#' The available information about a recorder is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/recorders_read}.
-#'
-#' @return A list containing information about the specified recorder: \url{https://api.ecopi.de/api/docs/#operation/recorders_read}.
-#'
-#' TODO export function
-# get_recorder_info <- function(recorder_name) {
-#   ecopi_api("GET /recorders/{recorder_name}/",
-#     recorder_name = recorder_name
-#   ) |>
-#     resp_body_json_to_df()
-# }
-
-
-
 
 #' PATCH recorder.
 #'
@@ -433,12 +356,13 @@ get_historicalrecorders <- function(...) {
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_partial_update}.
 #' @param recorder_name The name of the recorder to update information from.
+#' @param file_path Path to file to upload.
 #'
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
-#' patch_recorders(recorder_name = "008041aefd7ee1015", description = "This a recorder ...", lat = 48)
+#' \dontrun{patch_recorders(recorder_name = "008041aefd7ee1015", description = "This a recorder ...", lat = 48)}
 #' # OR with image
-#' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")
+#' \dontrun{patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")}
 #'
 #' @return httr2_response
 #'
@@ -461,10 +385,10 @@ patch_recorders <- function(..., recorder_name, new_data, file_path) {
 #'
 #' @examples
 #' # Retrieve all recorder states
-#' get_recorderstates()
+#' \dontrun{get_recorderstates()}
 #'
 #' # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-#' get_recorderstates(recorder_name = "00000000d76d0bf9")
+#' \dontrun{get_recorderstates(recorder_name = "00000000d76d0bf9")}
 #'
 #' @return A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderstates_list}.
 #'
@@ -477,19 +401,20 @@ get_recorderstates <- function(...) {
 
 
 # Summaryfiles --------------------------------------------------------------------------------------------------
-#' Get summary files of detections.
+
+#' Get a count of detections per clas and recorder for a specific project.
 #'
 #' Wrapper around the 'meta_project_detections_recorderspeciescounts_retrieve' endpoint to retrieve a count of species detections for each recorder in a given project.
 #'
+#' @param project_name Name of the project to get a count on detetcions class and recorder
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve}
 #'
-#' @examples#'
+#' @examples
 #' # Retrieve a count pre species and recorders. By default, the count is returned for today
-#' get_recorderspeciescounts(project_name = "039_zitro")
-#'
-#' You can specify a start_date and end_date to get a count for specific time interval.
-#' You can exclude 'countable' detections by setting a confidence threshold#
-#' get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)
+#' \dontrun{get_recorderspeciescounts(project_name = "039_zitro")}
+#' # You can specify a start_date and end_date to get a count for specific time interval.
+#' # Limit 'countable' detections by setting a confidence threshold
+#' \dontrun{get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)}
 #'
 #' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve}.
 #'

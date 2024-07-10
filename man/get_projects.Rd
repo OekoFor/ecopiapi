@@ -17,9 +17,9 @@ Wrapper around the 'projects_list' endpoint to retrieve a list of projects based
 }
 \examples{
 # retrieve a dataframe of all projects
-get_projects()
+\dontrun{get_projects()}
 
 # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-get_projects(project_name__in = "red_panda, green_banana")
+\dontrun{get_projects(project_name__in = "red_panda, green_banana")}
 
 }

@@ -8,6 +8,8 @@ patch_detections(..., id_or_uid)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_partial_update}}
+
+\item{id_or_uid}{The database ID or UID of the respective detection}
 }
 \value{
 httr2_response
@@ -17,6 +19,6 @@ Wrapper around the 'detections_partial_update' endpoint to update detections par
 }
 \examples{
 # Update the parameter confirmed of an example detection
-patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")
+\dontrun{patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")}
 
 }

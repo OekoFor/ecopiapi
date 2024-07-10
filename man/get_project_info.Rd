@@ -7,7 +7,7 @@
 get_project_info(project_name)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.}
+\item{project_name}{Name of the project.}
 }
 \value{
 A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.
@@ -20,6 +20,6 @@ This function retrieves information about a specific project, based on the proje
 }
 \examples{
 # Retrieve information about the '017_neeri' project
-get_project_info(project_name = "017_neeri")
+\dontrun{get_project_info(project_name = "017_neeri")}
 
 }

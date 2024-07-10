@@ -17,9 +17,9 @@ Wrapper around the 'historicalprojects_list' endpoint to retrieve a list of hist
 }
 \examples{
 # retrieve a dataframe of all historical projects
-get_historicalprojects()
+\dontrun{get_historicalprojects()}
 
 # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-get_historicalprojects(project_name__in = "red_panda, green_banana")
+\dontrun{get_historicalprojects(project_name__in = "red_panda, green_banana")}
 
 }

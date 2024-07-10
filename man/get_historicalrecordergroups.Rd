@@ -18,6 +18,6 @@ This contains the configurations and species list
 }
 \examples{
 # Retrieve a data frame of historical recorder groups for project 'oekofor'
-get_historicalrecordergroups(project_name = "oekofor")
+\dontrun{get_historicalrecordergroups(project_name = "oekofor")}
 
 }

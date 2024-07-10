@@ -2,11 +2,13 @@
 % Please edit documentation in R/api.R
 \name{get_recorderspeciescounts}
 \alias{get_recorderspeciescounts}
-\title{Get summary files of detections.}
+\title{Get a count of detections per clas and recorder for a specific project.}
 \usage{
 get_recorderspeciescounts(project_name, ...)
 }
 \arguments{
+\item{project_name}{Name of the project to get a count on detetcions class and recorder}
+
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve}}
 }
 \value{
@@ -16,12 +18,10 @@ A summary containing species counts per recorder within a project that match the
 Wrapper around the 'meta_project_detections_recorderspeciescounts_retrieve' endpoint to retrieve a count of species detections for each recorder in a given project.
 }
 \examples{
-#'
 # Retrieve a count pre species and recorders. By default, the count is returned for today
-get_recorderspeciescounts(project_name = "039_zitro")
-
-You can specify a start_date and end_date to get a count for specific time interval.
-You can exclude 'countable' detections by setting a confidence threshold#
-get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)
+\dontrun{get_recorderspeciescounts(project_name = "039_zitro")}
+# You can specify a start_date and end_date to get a count for specific time interval.
+# Limit 'countable' detections by setting a confidence threshold
+\dontrun{get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)}
 
 }
