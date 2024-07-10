@@ -9,7 +9,9 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-`{ecopiapi}` is an R package to get, post and patch using the [ecoPi Live_API](https://api.ecopi.de/api/v0.1/docs/).
+The goal of ecopiapi is to Get, post, patch data from the ecop API.
+
+Find the full documentation here: <https://oekofor.github.io/ecopiapi/>
 
 ## Installation
 
@@ -17,15 +19,17 @@ You can install the development version of ecopiapi from
 [GitHub](https://github.com/) with: You will need your Github PAT for
 authentication (privat repo).
 
-``` r
-# install.packages("devtools")
-devtools::install_github("OekoFor/ecopiapi", auth_token = {GITHUB_PAT})
-```
-
 Install a specific version
 
 ``` r
-devtools::install_github("OekoFor/ecopiapi@0.0.9", auth_token = {GITHUB_PAT})
+devtools::install_github("OekoFor/ecopiapi@0.1.3", auth_token = {GITHUB_PAT})
+```
+
+OR Install the latest commit from the main branch
+
+``` r
+# install.packages("devtools")
+devtools::install_github("OekoFor/ecopiapi", auth_token = {GITHUB_PAT})
 ```
 
 ## Example
