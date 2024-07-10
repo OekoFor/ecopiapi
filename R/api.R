@@ -51,7 +51,7 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
   if (missing(file_path)) {
     req_perform(req)
   } else {
-    media = curl::form_file(file_path)
+    media <- curl::form_file(file_path)
     req <- req_body_multipart(req, image = media, media = media)
     req_perform(req)
   } # neu eungefügt, wichtig für PATCH Funktionen
@@ -88,9 +88,9 @@ resp_body_json_to_df <- function(api_response) {
 #'
 #' @examples
 #' # Retrieve a list of detections for project '017_neeri' that occurred in March (month=3)
-#'  \dontrun{
-#'  get_detections(project_name = "017_neeri", datetime__month = 3)
-#'  }
+#' \dontrun{
+#' get_detections(project_name = "017_neeri", datetime__month = 3)
+#' }
 #'
 #' @return A data.frame containing the detections that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_list}
 #'
@@ -123,11 +123,11 @@ get_detections <- function(...) {
 #'   end = 4,
 #'   species_code = "Frosch",
 #'   confidence = -1
-#'   )
+#' )
 #' }
 post_detection <- function(...) {
-    params = list(...)
-    ecopi_api("POST /detections/", new_data = params)
+  params <- list(...)
+  ecopi_api("POST /detections/", new_data = params)
 }
 
 
@@ -141,7 +141,9 @@ post_detection <- function(...) {
 #'
 #' @examples
 #' # Update the parameter confirmed of an example detection
-#' \dontrun{patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")}
+#' \dontrun{
+#' patch_detections(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959", confirmed = "YES")
+#' }
 #'
 #' @return httr2_response
 #'
@@ -161,7 +163,9 @@ patch_detections <- function(..., id_or_uid, file_path) {
 #' @param uid uid of that specifiy detection. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_media_retrieve}
 #'
 #' @examples
-#' \dontrun{get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")}
+#' \dontrun{
+#' get_mediafile("c8c155f9-c05b-4e86-b842-88b80829e36c")
+#' }
 #'
 #' @return object of type "httr2_response". contains raw data in body (currently audio or image)
 #'
@@ -183,7 +187,9 @@ get_mediafile <- function(uid) {
 #'
 #' @examples
 #' # Retrieve a list of recordings for project '017_neeri' that occurred in March (month=3)
-#' \dontrun{get_recordings(project_name = "017_neeri", datetime__month = 3)}
+#' \dontrun{
+#' get_recordings(project_name = "017_neeri", datetime__month = 3)
+#' }
 #'
 #' @return A data.frame containing the recordings that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recordings_list}
 #'
@@ -206,10 +212,14 @@ get_recordings <- function(...) {
 #'
 #' @examples
 #' # retrieve a dataframe of all projects
-#' \dontrun{get_projects()}
+#' \dontrun{
+#' get_projects()
+#' }
 #'
 #' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-#' \dontrun{get_projects(project_name__in = "red_panda, green_banana")}
+#' \dontrun{
+#' get_projects(project_name__in = "red_panda, green_banana")
+#' }
 #'
 #' @return A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.
 #'
@@ -229,10 +239,14 @@ get_projects <- function(...) {
 #'
 #' @examples
 #' # retrieve a dataframe of all historical projects
-#' \dontrun{get_historicalprojects()}
+#' \dontrun{
+#' get_historicalprojects()
+#' }
 #'
 #' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
-#' \dontrun{get_historicalprojects(project_name__in = "red_panda, green_banana")}
+#' \dontrun{
+#' get_historicalprojects(project_name__in = "red_panda, green_banana")
+#' }
 #'
 #' @return A dataframe containing the historical projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalprojects_list}.
 #'
@@ -252,7 +266,9 @@ get_historicalprojects <- function(...) {
 #'
 #' @examples
 #' # Retrieve information about the '017_neeri' project
-#' \dontrun{get_project_info(project_name = "017_neeri")}
+#' \dontrun{
+#' get_project_info(project_name = "017_neeri")
+#' }
 #'
 #' @details
 #' This function retrieves information about a specific project, based on the project name provided in the 'project_name' parameter.
@@ -280,7 +296,9 @@ get_project_info <- function(project_name) {
 #'
 #' @examples
 #' # Retrieve a data frame of recorder groups for project 'oekofor'
-#' \dontrun{get_recordergroups(project_name = "oekofor")}
+#' \dontrun{
+#' get_recordergroups(project_name = "oekofor")
+#' }
 #'
 #' @return A list containing the recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recordergroups_list}.
 #'
@@ -301,7 +319,9 @@ get_recordergroups <- function(...) {
 #'
 #' @examples
 #' # Retrieve a data frame of historical recorder groups for project 'oekofor'
-#' \dontrun{get_historicalrecordergroups(project_name = "oekofor")}
+#' \dontrun{
+#' get_historicalrecordergroups(project_name = "oekofor")
+#' }
 #'
 #' @return A list containing the historical recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecordergroups_list}.
 #'
@@ -325,7 +345,9 @@ get_historicalrecordergroups <- function(...) {
 #'
 #' @examples
 #' # Retrieve a dataframe of recorder logs for project '017_neeri'
-#' \dontrun{get_recorderlogs(project_name = "017_neeri")}
+#' \dontrun{
+#' get_recorderlogs(project_name = "017_neeri")
+#' }
 #'
 #' @return A dataframe containing the recorder logs that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderlogs_list}.
 #'
@@ -347,7 +369,9 @@ get_recorderlogs <- function(...) {
 #'
 #' @examples
 #' # Retrieve a list of recorders for project '017_neeri'
-#' \dontrun{get_recorders(project_name = "017_neerach_ried")}
+#' \dontrun{
+#' get_recorders(project_name = "017_neerach_ried")
+#' }
 #'
 #' @return A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_list}.
 #'
@@ -367,7 +391,9 @@ get_recorders <- function(...) {
 #'
 #' @examples
 #' # Retrieve a list of historical recorders for project '017_neeri'
-#' \dontrun{get_historicalrecorders(project_name = "017_neerach_ried")}
+#' \dontrun{
+#' get_historicalrecorders(project_name = "017_neerach_ried")
+#' }
 #'
 #' @return A dataframe containing the historical recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecorders_list}.
 #'
@@ -390,9 +416,13 @@ get_historicalrecorders <- function(...) {
 #'
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014
-#' \dontrun{patch_recorders(recorder_name = "008041aefd7ee1015", description = "This a recorder ...", lat = 48)}
+#' \dontrun{
+#' patch_recorders(recorder_name = "008041aefd7ee1015", description = "This a recorder ...", lat = 48)
+#' }
 #' # OR with image
-#' \dontrun{patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")}
+#' \dontrun{
+#' patch_recorders(recorder_name = "00041aefd7jgg1014", description = "Teeeest ...", lat = 48, file_path = "/sample_path/sample.jpeg")
+#' }
 #'
 #' @return httr2_response
 #'
@@ -414,10 +444,14 @@ patch_recorders <- function(..., recorder_name, file_path) {
 #'
 #' @examples
 #' # Retrieve all recorder states
-#' \dontrun{get_recorderstates()}
+#' \dontrun{
+#' get_recorderstates()
+#' }
 #'
 #' # Retrieve a list of recorder states for recorder '00000000d76d0bf9'
-#' \dontrun{get_recorderstates(recorder_name = "00000000d76d0bf9")}
+#' \dontrun{
+#' get_recorderstates(recorder_name = "00000000d76d0bf9")
+#' }
 #'
 #' @return A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderstates_list}.
 #'
@@ -440,10 +474,14 @@ get_recorderstates <- function(...) {
 #'
 #' @examples
 #' # Retrieve a count pre species and recorders. By default, the count is returned for today
-#' \dontrun{get_recorderspeciescounts(project_name = "039_zitro")}
+#' \dontrun{
+#' get_recorderspeciescounts(project_name = "039_zitro")
+#' }
 #' # You can specify a start_date and end_date to get a count for specific time interval.
 #' # Limit 'countable' detections by setting a confidence threshold
-#' \dontrun{get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)}
+#' \dontrun{
+#' get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)
+#' }
 #'
 #' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve}.
 #'
