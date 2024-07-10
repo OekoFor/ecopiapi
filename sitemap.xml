@@ -1,0 +1,24 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://oekofor.github.io/ecopiapi/404.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/authors.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/index.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/ecopi_api.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/ecopi_error_body.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/ecopiapi-package.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_detections.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_historicalprojects.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_historicalrecordergroups.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_historicalrecorders.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_mediafile.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_project_info.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_projects.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_recordergroups.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorders.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderspeciescounts.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderstates.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_recordings.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/index.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/patch_detections.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/resp_body_json_to_df.html</loc></url>
+</urlset>
+
