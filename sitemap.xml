@@ -13,12 +13,14 @@
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_project_info.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_projects.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recordergroups.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderlogs.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorders.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderspeciescounts.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderstates.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recordings.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/index.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/patch_detections.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/patch_recorders.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/resp_body_json_to_df.html</loc></url>
 </urlset>
 

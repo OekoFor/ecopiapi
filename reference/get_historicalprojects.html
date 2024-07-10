@@ -57,12 +57,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># retrieve a dataframe of all historical projects</span></span></span>
-<span class="r-in"><span><span class="fu">get_historicalprojects</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_ecopiapi_key():</span> No key found</span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">get_historicalprojects</span><span class="op">(</span><span class="op">)</span> <span class="co"># \dontrun{}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name</span></span></span>
-<span class="r-in"><span><span class="fu">get_historicalprojects</span><span class="op">(</span>project_name__in <span class="op">=</span> <span class="st">"red_panda, green_banana"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_ecopiapi_key():</span> No key found</span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">get_historicalprojects</span><span class="op">(</span>project_name__in <span class="op">=</span> <span class="st">"red_panda, green_banana"</span><span class="op">)</span> <span class="co"># \dontrun{}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
