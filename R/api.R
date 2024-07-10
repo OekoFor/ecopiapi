@@ -118,9 +118,9 @@ get_detections <- function(...) {
 #'
 #' @export
 
-patch_detections <- function(..., id_or_uid) {
+patch_detections <- function(..., id_or_uid, file_path) {
   params <- list(...)
-  ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = params)
+  ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = params, file_path = file_path)
 }
 
 
