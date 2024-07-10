@@ -111,9 +111,6 @@ get_detections <- function(...) {
 #'
 #' @param ... Find required parameters here \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_create}
 #'
-#' @return
-#' @export
-#'
 #' @examples
 #' \dontrun{
 #' post_detection(
@@ -125,6 +122,8 @@ get_detections <- function(...) {
 #'   confidence = -1
 #' )
 #' }
+#' @return httr2_response
+#' @export
 post_detection <- function(...) {
   params <- list(...)
   ecopi_api("POST /detections/", new_data = params)

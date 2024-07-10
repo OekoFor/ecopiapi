@@ -9,6 +9,9 @@ post_detection(...)
 \arguments{
 \item{...}{Find required parameters here \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_create}}
 }
+\value{
+httr2_response
+}
 \description{
 Wrapper around the 'detections_create' endpoint.
 If you want to create a new detection and include a media file, you need to do it in two steps.
