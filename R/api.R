@@ -51,7 +51,8 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
   if (missing(file_path)) {
     req_perform(req)
   } else {
-    req <- req_body_multipart(req, image = curl::form_file(file_path))
+    media = curl::form_file(file_path)
+    req <- req_body_multipart(req, image = media, media = media)
     req_perform(req)
   } # neu eungefügt, wichtig für PATCH Funktionen
 }
