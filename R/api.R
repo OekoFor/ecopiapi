@@ -75,7 +75,6 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
 #' @importFrom httr2 resp_status
 #' @importFrom httr2 resp_has_body
 resp_body_json_to_df <- function(api_response) {
-
   resp_body_not_empty <- resp_has_body(api_response)
   if (resp_body_not_empty) {
     api_response |>
