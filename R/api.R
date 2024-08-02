@@ -59,23 +59,32 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
 
 
 
-#' Convert response body to data frame
+#' Convert API Response Body to Data Frame
 #'
-#' @param api_response Response from API
+#' This function takes an API response object and converts its JSON body to a data frame if the response contains a body. If the response does not contain a body, a warning is issued with the response status code.
 #'
-#' @return Data frame
+#' @param api_response Response object from the API, expected to be of class `httr2_response`.
+#'
+#' @return A data frame containing the JSON content of the response body if it exists; otherwise, `NULL`.
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
 #' resp_body_json_to_df(response)
-#' }
+#'
 #' @importFrom httr2 resp_body_json
+#' @importFrom httr2 resp_status
+#' @importFrom httr2 resp_has_body
 resp_body_json_to_df <- function(api_response) {
-  api_response |>
-    resp_body_json(simplifyVector = TRUE)
-}
 
+  resp_body_not_empty <- resp_has_body(api_response)
+  if (resp_body_not_empty) {
+    api_response |>
+      resp_body_json(simplifyVector = TRUE)
+  } else {
+    warning("The response does not contain a body. Status code: ", resp_status(api_response))
+    NULL
+  }
+}
 
 # Detections ------------------------------------------------------------------------------------------------------
 
