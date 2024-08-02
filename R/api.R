@@ -21,8 +21,8 @@ ecopi_error_body <- function(resp) {
 #' This function sends an API request to the Ecopi API with the specified resource, parameters, and optional arguments.
 #'
 #' @param resource A character string specifying the API resource to request.
-#' @param ... Additional arguments to be passed to the req_template() function.
-#' @param params A named list of query parameters to include in the request.
+#' @param ... Path parameters, that point to a specific resource, to be passed to the req_template() function.
+#' @param params Query parameters that modify the reuqest.
 #' @param new_data A named list of parameters to be updated/ patched.
 #' @param file_path A path currently only important to patch an image to a recorder endpoint.
 #' @return A `response` object from the httr2 package containing the API response.

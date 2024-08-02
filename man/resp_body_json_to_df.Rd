@@ -2,22 +2,22 @@
 % Please edit documentation in R/api.R
 \name{resp_body_json_to_df}
 \alias{resp_body_json_to_df}
-\title{Convert response body to data frame}
+\title{Convert API Response Body to Data Frame}
 \usage{
 resp_body_json_to_df(api_response)
 }
 \arguments{
-\item{api_response}{Response from API}
+\item{api_response}{Response object from the API, expected to be of class \code{httr2_response}.}
 }
 \value{
-Data frame
+A data frame containing the JSON content of the response body if it exists; otherwise, \code{NULL}.
 }
 \description{
-Convert response body to data frame
+This function takes an API response object and converts its JSON body to a data frame if the response contains a body. If the response does not contain a body, a warning is issued with the response status code.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
 resp_body_json_to_df(response)
-}
+\dontshow{\}) # examplesIf}
 }

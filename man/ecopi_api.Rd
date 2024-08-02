@@ -9,9 +9,9 @@ ecopi_api(resource, ..., params = list(), new_data = list(), file_path)
 \arguments{
 \item{resource}{A character string specifying the API resource to request.}
 
-\item{...}{Additional arguments to be passed to the req_template() function.}
+\item{...}{Path parameters, that point to a specific resource, to be passed to the req_template() function.}
 
-\item{params}{A named list of query parameters to include in the request.}
+\item{params}{Query parameters that modify the reuqest.}
 
 \item{new_data}{A named list of parameters to be updated/ patched.}
 
