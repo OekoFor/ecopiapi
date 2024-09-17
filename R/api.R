@@ -30,8 +30,6 @@ ecopi_error_body <- function(resp) {
 #' \dontrun{
 #' # Send a request to the 'detections' endpoint. Only get detections in the project '017_neeri'
 #' response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
-#'
-#' #
 #' }
 #' @import httr2
 #' @export
@@ -108,6 +106,26 @@ get_detections <- function(...) {
   ecopi_api("GET /detections/", params = params) |>
     resp_body_json_to_df()
 }
+
+
+#' Get detections retrieve.
+#'
+#' Wrapper around the 'Retrieve Detections' endpoint to retrieve a single detection based on uid
+#'
+#' @param id_or_uid The database ID or UID of the respective detection
+#'
+#' @examples
+#' # Retrieve a single detection for a specific uid
+#' get_detections_retrieve(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959")
+#'
+#' @return A list containing the detection that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docsco/#operation/detections_list}
+#'
+#' @export
+get_detections_retrieve <- function(id_or_uid) {
+  ecopi_api("GET /detections/{id_or_uid}/", id_or_uid = id_or_uid) |>
+    resp_body_json_to_df()
+}
+
 
 
 #' Post a new detection

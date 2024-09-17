@@ -3,6 +3,7 @@
 export(ecopi_api)
 export(ecopi_error_body)
 export(get_detections)
+export(get_detections_retrieve)
 export(get_historicalprojects)
 export(get_historicalrecordergroups)
 export(get_historicalrecorders)
