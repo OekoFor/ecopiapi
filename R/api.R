@@ -105,8 +105,7 @@ get_detections_list <- function(params = list()) {
 #' @return A list containing the detection that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docsco/#operation/detections_list)
 #'
 #' @export
-get_detections_retrieve <- function(..., id_or_uid) {
-  # params <- list(...)
+get_detections_retrieve <- function(id_or_uid) {
   ecopi_api("GET /detections/{id_or_uid}/", id_or_uid = id_or_uid) |>
     resp_body_json_to_df()
 }
