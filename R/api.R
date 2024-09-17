@@ -91,6 +91,28 @@ get_detections_list <- function(params = list()) {
     resp_body_json_to_df()
 }
 
+
+#' Get detections retrieve.
+#'
+#' Wrapper around the 'Retrieve Detections' endpoint to retrieve a single detection based on uid
+#'
+#' @param ... query paramaters. See \url(https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_retrieve)
+#'
+#' @examples
+#' # Retrieve a single detection for a specific uid
+#' get_detections_retrieve(uid="64733fbc-7cc8-49f6-adf1-c9ec2d676959")
+#'
+#' @return A list containing the detection that match the specified query parameters: \url(https://api.ecopi.de/api/v0.1/docsco/#operation/detections_list)
+#'
+#' @export
+get_detections_retrieve <- function(..., id_or_uid) {
+  # params <- list(...)
+  ecopi_api("GET /detections/{id_or_uid}/", id_or_uid = id_or_uid) |>
+    resp_body_json_to_df()
+}
+
+
+
 #' Get latest detections.
 #'
 #' Wrapper around the 'detections_read' endpoint to retrieve the latest detections.
