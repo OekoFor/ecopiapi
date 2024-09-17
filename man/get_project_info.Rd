@@ -7,20 +7,21 @@
 get_project_info(project_name)
 }
 \arguments{
-\item{project_name}{The name of the project to retrieve information about.}
+\item{project_name}{Name of the project.}
 }
 \value{
-A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#operation/projects_read}.
+A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.
 }
 \description{
-Wrapper around the 'projects_read' endpoint to retrieve information about a specific project.
+Wrapper around the 'projects_retrieve' endpoint to retrieve information about a specific project.
 }
 \details{
 This function retrieves information about a specific project, based on the project name provided in the 'project_name' parameter.
-The available information about a project is documented in the EcoPi API documentation: \url{https://api.ecopi.de/api/docs/#operation/projects_read}.
 }
 \examples{
 # Retrieve information about the '017_neeri' project
+\dontrun{
 get_project_info(project_name = "017_neeri")
+}
 
 }
