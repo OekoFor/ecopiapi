@@ -1,3 +1,6 @@
+# ecopiapi 0.2.2
+new function get_detetcions_retrieve()
+
 # ecopiapi 0.2.1
 
 - return NULL when response body is empty instead of erroring
