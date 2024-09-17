@@ -17,6 +17,6 @@ Wrapper around the 'Retrieve Detections' endpoint to retrieve a single detection
 }
 \examples{
 # Retrieve a single detection for a specific uid
-get_detections_retrieve(id_or_uid="64733fbc-7cc8-49f6-adf1-c9ec2d676959")
+get_detections_retrieve(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959")
 
 }
