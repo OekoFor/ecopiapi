@@ -176,6 +176,10 @@ post_detection <- function(...) {
 
 patch_detections <- function(..., id_or_uid, file_path) {
   params <- list(...)
+  # important to make emppty/ blank comments (i.o.w. deleting old comments)
+  if ("comment" %in% names(params) && params[["comment"]] == "") {
+    params[["comment"]] <- "" # Explicit empty string for 'comment'
+  }
   ecopi_api("PATCH /detections/{id_or_uid}/", id_or_uid = id_or_uid, new_data = params, file_path = file_path)
 }
 
