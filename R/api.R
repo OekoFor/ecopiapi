@@ -55,7 +55,7 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
     req <- req_body_json(req, new_data) # neu eungefügt, wichtig für PATCH Funktionen
     req_perform(req)
   } else {
-    req <- req_body_multipart(req, image= curl::form_file(file_path))
+    req <- req_body_multipart(req, image = curl::form_file(file_path))
     req_perform(req)
   }
 }
