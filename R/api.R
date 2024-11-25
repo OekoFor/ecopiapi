@@ -38,21 +38,26 @@ ecopi_error_body <- function(resp) {
 ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_path) {
   params <- lapply(params, paste, collapse = ",")
   new_data <- lapply(new_data, function(x) if (identical(x, "")) jsonlite::unbox(NULL) else paste(x, collapse = ","))
+
+  # Check if both file_path and new_data are provided
+  if (!missing(file_path) && length(unlist(new_data)) > 0) {
+    warning("The 'new_data' parameter is ignored when 'file_path' is provided.")
+  }
+
   req <- request("https://api.ecopi.de/api/v0.1") |>
     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
     req_user_agent("ecopiapi") |>
     req_error(body = ecopi_error_body) |>
     req_template(resource, ...) |>
-    req_url_query(!!!params) |>
-    req_body_json(new_data) # neu eungefügt, wichtig für PATCH Funktionen
+    req_url_query(!!!params)
 
   if (missing(file_path)) {
+    req <- req_body_json(req, new_data) # neu eungefügt, wichtig für PATCH Funktionen
     req_perform(req)
   } else {
-    media <- curl::form_file(file_path)
-    req <- req_body_multipart(req, image = media, media = media)
+    req <- req_body_multipart(req, image= curl::form_file(file_path))
     req_perform(req)
-  } # neu eungefügt, wichtig für PATCH Funktionen
+  }
 }
 
 
