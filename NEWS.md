@@ -1,3 +1,5 @@
+# ecopiapi 0.2.4
+
 # ecopiapi 0.2.3
 - adapted patch_detection() to be able to patch empty/ blank comments (i.o.w. deleting old comments)
 
