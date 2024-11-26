@@ -279,7 +279,7 @@ get_projects <- function(...) {
 #'
 #' # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
 #' \dontrun{
-#' get_historicalprojects(project_name__in = "red_panda, green_banana")
+#' get_historicalprojects(project_name__in = c("pam_in_chemnitz"))
 #' }
 #'
 #' @return A dataframe containing the historical projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalprojects_list}.
@@ -380,7 +380,7 @@ get_historicalrecordergroups <- function(...) {
 #' @examples
 #' # Retrieve a dataframe of recorder logs for project '017_neeri'
 #' \dontrun{
-#' get_recorderlogs(project_name = "017_neeri")
+#' get_recorderlogs(project_name = "pam_in_chemnitz")
 #' }
 #'
 #' @return A dataframe containing the recorder logs that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorderlogs_list}.
@@ -426,7 +426,7 @@ get_recorders <- function(...) {
 #' @examples
 #' # Retrieve a list of historical recorders for project '017_neeri'
 #' \dontrun{
-#' get_historicalrecorders(project_name = "017_neerach_ried")
+#' get_historicalrecorders(project_name = "pam_in_chemnitz")
 #' }
 #'
 #' @return A dataframe containing the historical recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecorders_list}.
