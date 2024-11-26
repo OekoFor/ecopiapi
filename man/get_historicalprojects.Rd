@@ -23,7 +23,7 @@ get_historicalprojects()
 
 # Retrieve a list of projects that contain 'red_panda' or 'green_banana' in their name
 \dontrun{
-get_historicalprojects(project_name__in = "red_panda, green_banana")
+get_historicalprojects(project_name__in = c("pam_in_chemnitz"))
 }
 
 }

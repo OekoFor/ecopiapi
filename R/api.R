@@ -24,7 +24,7 @@ ecopi_error_body <- function(resp) {
 #' @param ... Path parameters, that point to a specific resource, to be passed to the req_template() function.
 #' @param params Query parameters that modify the reuqest.
 #' @param new_data A named list of parameters to be updated/ patched.
-#' @param file_path A path currently only important to patch an image to a recorder endpoint.
+#' @param file_path A path currently only important to patch an image to a recorder endpoint (Watchout! If file_path given, new_data gets ignored (cannot patch multiple types)).
 #' @return A `response` object from the httr2 package containing the API response.
 #' @examples
 #' \dontrun{
@@ -39,7 +39,7 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
   params <- lapply(params, paste, collapse = ",")
   new_data <- lapply(new_data, function(x) if (identical(x, "")) jsonlite::unbox(NULL) else paste(x, collapse = ","))
 
-  # Check if both file_path and new_data are provided
+  # Check if both file_path and new_data are provided and give warning if so
   if (!missing(file_path) && length(unlist(new_data)) > 0) {
     warning("The 'new_data' parameter is ignored when 'file_path' is provided.")
   }
@@ -167,7 +167,7 @@ post_detection <- function(...) {
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_partial_update}
 #' @param id_or_uid The database ID or UID of the respective detection
-#' @param file_path Path to file to upload
+#' @param file_path Path to file to upload (Watchout! If file_path given, new_data gets ignored (cannot patch multiple types)).
 #'
 #' @examples
 #' # Update the parameter confirmed of an example detection
@@ -446,7 +446,7 @@ get_historicalrecorders <- function(...) {
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_partial_update}.
 #' @param recorder_name The name of the recorder to update information from.
-#' @param file_path Path to file to upload.
+#' @param file_path Path to file to upload (Watchout! If file_path given, new_data gets ignored (cannot patch multiple types)).
 #'
 #' @examples
 #' # Update the parameter description of the recorder 00041aefd7jgg1014

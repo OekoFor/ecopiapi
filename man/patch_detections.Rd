@@ -11,7 +11,7 @@ patch_detections(..., id_or_uid, file_path)
 
 \item{id_or_uid}{The database ID or UID of the respective detection}
 
-\item{file_path}{Path to file to upload}
+\item{file_path}{Path to file to upload (Watchout! If file_path given, new_data gets ignored (cannot patch multiple types)).}
 }
 \value{
 httr2_response

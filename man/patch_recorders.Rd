@@ -11,7 +11,7 @@ patch_recorders(..., recorder_name, file_path)
 
 \item{recorder_name}{The name of the recorder to update information from.}
 
-\item{file_path}{Path to file to upload.}
+\item{file_path}{Path to file to upload (Watchout! If file_path given, new_data gets ignored (cannot patch multiple types)).}
 }
 \value{
 httr2_response
