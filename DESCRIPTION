@@ -1,6 +1,6 @@
 Package: ecopiapi
 Title: R package to interact with the ecopi API
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: 
     person("Felix", "Guenther", , "guenther@oekofor.de", role = c("aut", "cre"))
 Description: Get, post, patch data from the ecop API.
