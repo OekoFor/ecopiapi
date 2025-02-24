@@ -1,4 +1,5 @@
 # ecopiapi 0.2.5
+- switch to backend api v0.2
 
 # ecopiapi 0.2.4
 
