@@ -44,7 +44,7 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
     warning("The 'new_data' parameter is ignored when 'file_path' is provided.")
   }
 
-  req <- request("https://api.ecopi.de/api/v0.1") |>
+  req <- request("https://api.ecopi.de/api/v0.2") |>
     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
     req_user_agent("ecopiapi") |>
     req_error(body = ecopi_error_body) |>
