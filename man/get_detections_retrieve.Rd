@@ -10,7 +10,7 @@ get_detections_retrieve(id_or_uid)
 \item{id_or_uid}{The database ID or UID of the respective detection}
 }
 \value{
-A list containing the detection that match the specified query parameters: \url{https://api.ecopi.de/api/v0.1/docsco/#operation/detections_list}
+A list containing the detection that match the specified query parameters: \url{https://api.ecopi.de/api/v0.2/docsco/#operation/detections_list}
 }
 \description{
 Wrapper around the 'Retrieve Detections' endpoint to retrieve a single detection based on uid

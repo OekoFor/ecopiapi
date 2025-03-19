@@ -7,10 +7,10 @@
 get_projects(...)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}}
 }
 \value{
-A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.
+A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}.
 }
 \description{
 Wrapper around the 'projects_list' endpoint to retrieve a list of projects based on the specified query parameters.

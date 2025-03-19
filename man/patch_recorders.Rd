@@ -7,7 +7,7 @@
 patch_recorders(..., recorder_name, file_path)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_recorders_partial_update}.}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorders_partial_update}.}
 
 \item{recorder_name}{The name of the recorder to update information from.}
 

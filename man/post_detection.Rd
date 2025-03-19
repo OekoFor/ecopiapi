@@ -7,7 +7,7 @@
 post_detection(...)
 }
 \arguments{
-\item{...}{Find required parameters here \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_create}}
+\item{...}{Find required parameters here \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_create}}
 }
 \value{
 httr2_response
