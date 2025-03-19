@@ -7,7 +7,7 @@
 get_mediafile(uid)
 }
 \arguments{
-\item{uid}{uid of that specifiy detection. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_media_retrieve}}
+\item{uid}{uid of that specifiy detection. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_media_retrieve}}
 }
 \value{
 object of type "httr2_response". contains raw data in body (currently audio or image)

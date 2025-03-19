@@ -7,10 +7,10 @@
 get_historicalrecorders(...)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecorders_list}.}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecorders_list}.}
 }
 \value{
-A dataframe containing the historical recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_historicalrecorders_list}.
+A dataframe containing the historical recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecorders_list}.
 }
 \description{
 Wrapper around the 'historicalrecorders_list' endpoint to get a list of recorders based on the specified query parameters.

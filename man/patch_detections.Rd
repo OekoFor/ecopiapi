@@ -7,7 +7,7 @@
 patch_detections(..., id_or_uid, file_path)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_partial_update}}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_partial_update}}
 
 \item{id_or_uid}{The database ID or UID of the respective detection}
 

@@ -10,7 +10,7 @@ get_project_info(project_name)
 \item{project_name}{Name of the project.}
 }
 \value{
-A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_projects_list}.
+A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}.
 }
 \description{
 Wrapper around the 'projects_retrieve' endpoint to retrieve information about a specific project.

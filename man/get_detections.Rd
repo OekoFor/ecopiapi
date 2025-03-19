@@ -7,10 +7,10 @@
 get_detections(...)
 }
 \arguments{
-\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_list}}
+\item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_list}}
 }
 \value{
-A data.frame containing the detections that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_detections_list}
+A data.frame containing the detections that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_list}
 }
 \description{
 Wrapper around the 'detections_list' endpoint to retrieve a list of detections based on the specified query parameters.
