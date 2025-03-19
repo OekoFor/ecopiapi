@@ -1,3 +1,6 @@
+# ecopiapi 0.2.6
+- added include_validation_status to get_recorderSpeciesCounts()
+
 # ecopiapi 0.2.5
 - switch to backend api v0.2
 
