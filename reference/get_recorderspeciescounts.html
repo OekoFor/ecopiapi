@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ecopiapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_recorderspeciescounts</span><span class="op">(</span><span class="va">project_name</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_recorderspeciescounts</span><span class="op">(</span><span class="va">project_name</span>, include_validation_status <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -50,13 +50,17 @@
 <dd><p>Name of the project to get a count on detetcions class and recorder</p></dd>
 
 
+<dt id="arg-include-validation-status">include_validation_status<a class="anchor" aria-label="anchor" href="#arg-include-validation-status"></a></dt>
+<dd><p>Boolean to include validation status in the response</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>query paramaters. See <a href="https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve" class="external-link">https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve</a></p></dd>
+<dd><p>query paramaters. See <a href="https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve" class="external-link">https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve</a></p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A summary containing species counts per recorder within a project that match the specified query parameters: <a href="https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve" class="external-link">https://api.ecopi.de/api/docs/#tag/v0.1/operation/v0.1_meta_project_detections_recorderspeciescounts_retrieve</a>.</p>
+    <p>A summary containing species counts per recorder within a project that match the specified query parameters: <a href="https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve" class="external-link">https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve</a>.</p>
     </div>
 
     <div class="section level2">
