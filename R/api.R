@@ -531,3 +531,38 @@ get_recorderspeciescounts <- function(project_name, include_validation_status = 
             params = params) |>
     resp_body_json_to_df()
 }
+
+
+#' Get data from a linked URL endpoint (mostly provided from other gtes)
+#'
+#' @param full_url URL of linked endpoint
+#'
+#' @examples
+#' # Retrieve a ecopiapp release from a linked URL
+#' \dontrun{
+#' get_by_url("https://api.ecopi.de/api/v0.2/releases/69/")
+#' }
+#'
+#' @return Depends on the input. Mostly a data frame of the requested data.
+#'
+#' @export
+get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2") {
+  if (is.na(full_url) || !nzchar(full_url)) {
+    warning("Empty or NA URL provided.")
+    return(NULL)
+  }
+
+  # Extract the relative path after /api/v0.2/
+  relative_path <- sub(paste0("^", base_url), "", full_url)
+  api_path <- paste("GET", relative_path)
+  message("Fetching: ", api_path)  # Debugging
+
+  tryCatch({
+    ecopi_api(api_path) |> resp_body_json_to_df()
+  }, error = function(e) {
+    warning(sprintf("Failed to fetch data from %s: %s", full_url, e$message))
+    NULL
+  })
+}
+
+
