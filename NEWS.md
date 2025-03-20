@@ -1,3 +1,6 @@
+# ecopiapi 0.2.7
+- added get_by_url() to get linked URL endpoints from other get functions
+
 # ecopiapi 0.2.6
 - added include_validation_status to get_recorderSpeciesCounts()
 
