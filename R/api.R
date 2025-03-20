@@ -527,8 +527,9 @@ get_recorderspeciescounts <- function(project_name, include_validation_status = 
     params$include_validation_status <- "true"
   }
   ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/",
-            project_name = project_name,
-            params = params) |>
+    project_name = project_name,
+    params = params
+  ) |>
     resp_body_json_to_df()
 }
 
@@ -555,14 +556,15 @@ get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2") {
   # Extract the relative path after /api/v0.2/
   relative_path <- sub(paste0("^", base_url), "", full_url)
   api_path <- paste("GET", relative_path)
-  message("Fetching: ", api_path)  # Debugging
+  message("Fetching: ", api_path) # Debugging
 
-  tryCatch({
-    ecopi_api(api_path) |> resp_body_json_to_df()
-  }, error = function(e) {
-    warning(sprintf("Failed to fetch data from %s: %s", full_url, e$message))
-    NULL
-  })
+  tryCatch(
+    {
+      ecopi_api(api_path) |> resp_body_json_to_df()
+    },
+    error = function(e) {
+      warning(sprintf("Failed to fetch data from %s: %s", full_url, e$message))
+      NULL
+    }
+  )
 }
-
-
