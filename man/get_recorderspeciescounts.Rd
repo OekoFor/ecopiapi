@@ -2,7 +2,7 @@
 % Please edit documentation in R/api.R
 \name{get_recorderspeciescounts}
 \alias{get_recorderspeciescounts}
-\title{Get a count of detections per clas and recorder for a specific project.}
+\title{Get a count of detections per species and recorder for a specific project.}
 \usage{
 get_recorderspeciescounts(project_name, include_validation_status = FALSE, ...)
 }
