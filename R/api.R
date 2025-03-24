@@ -498,43 +498,6 @@ get_recorderstates <- function(...) {
 }
 
 
-# Summaryfiles --------------------------------------------------------------------------------------------------
-
-#' Get a count of detections per clas and recorder for a specific project.
-#'
-#' Wrapper around the 'meta_project_detections_recorderspeciescounts_retrieve' endpoint to retrieve a count of species detections for each recorder in a given project.
-#'
-#' @param project_name Name of the project to get a count on detetcions class and recorder
-#' @param include_validation_status Boolean to include validation status in the response
-#' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}
-#'
-#' @examples
-#' # Retrieve a count pre species and recorders. By default, the count is returned for today
-#' \dontrun{
-#' get_recorderspeciescounts(project_name = "039_zitro")
-#' }
-#' # You can specify a start_date and end_date to get a count for specific time interval.
-#' # Limit 'countable' detections by setting a confidence threshold
-#' \dontrun{
-#' get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)
-#' }
-#'
-#' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}.
-#'
-#' @export
-get_recorderspeciescounts <- function(project_name, include_validation_status = FALSE, ...) {
-  params <- list(...)
-  if (include_validation_status) {
-    params$include_validation_status <- "true"
-  }
-  ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/",
-    project_name = project_name,
-    params = params
-  ) |>
-    resp_body_json_to_df()
-}
-
-
 #' Get data from a linked URL endpoint (mostly provided from other gtes)
 #'
 #' @param full_url URL of linked endpoint
@@ -569,3 +532,73 @@ get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2") {
     }
   )
 }
+
+
+# Aggregation endpoints --- --- ---
+
+#' Get a count of detections per species and recorder for a specific project.
+#'
+#' Wrapper around the 'meta_project_detections_recorderspeciescounts_retrieve' endpoint to retrieve a count of species detections for each recorder in a given project.
+#'
+#' @param project_name Name of the project to get a count on detetcions class and recorder
+#' @param include_validation_status Boolean to include validation status in the response
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}
+#'
+#' @examples
+#' # Retrieve a count pre species and recorders. By default, the count is returned for today
+#' \dontrun{
+#' get_recorderspeciescounts(project_name = "039_zitro")
+#' }
+#' # You can specify a start_date and end_date to get a count for specific time interval.
+#' # Limit 'countable' detections by setting a confidence threshold
+#' \dontrun{
+#' get_recorderspeciescounts(project_name = "039_zitro", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)
+#' }
+#'
+#' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}.
+#'
+#' @export
+get_recorderspeciescounts <- function(project_name, include_validation_status = FALSE, ...) {
+  params <- list(...)
+  if (include_validation_status) {
+    params$include_validation_status <- "true"
+  }
+  ecopi_api("GET /meta/project/{project_name}/detections/recorderspeciescounts/",
+    project_name = project_name,
+    params = params
+  ) |>
+    resp_body_json_to_df()
+}
+
+
+#' Get a count of detections per recorder grouped by given parameters.
+#'
+#' Wrapper around the 'aggregations_project_recorders_count_detections' endpoint to retrieve a count of detections for each recorder and grouped by the specified query parameters.
+#'
+#' @param project_name Name of the project to get a count on detetcions class and recorder
+#' @param ... query paramaters. See \url{http://192.168.10.30:8001/api/docs/#tag/v0.2/operation/v0.2_aggregations_project_recorder_recordings_count_detections_retrieve}
+#'
+#' @examples
+#' # Retrieve a count pre species and recorders. By default, the count is returned for today
+#' \dontrun{
+#' get_recorders_count_detections(project_name = "039_zitro")
+#' }
+#' # You can specify a start_date and end_date to get a count for specific time interval.
+#' # Limit 'countable' detections by setting a confidence threshold
+#' \dontrun{
+#' get_recorders_count_detections(project_name = "039_zitro", start_datetime = "2023-01-01", end_datetime = "2023-12-31", min_confidence = 0.85)
+#' }
+#'
+#' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{http://192.168.10.30:8001/api/docs/#tag/v0.2/operation/v0.2_aggregations_project_recorder_recordings_count_detections_retrieve}.
+#'
+#' @export
+get_recorders_count_detections <- function(project_name, ...) {
+  params <- list(...)
+  ecopi_api("GET /aggregations/project/{project_name}/recorders/count_detections",
+            project_name = project_name,
+            params = params
+  ) |>
+    resp_body_json_to_df()
+}
+
+
