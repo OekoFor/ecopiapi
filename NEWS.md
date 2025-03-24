@@ -1,3 +1,6 @@
+# ecopiapi 0.2.8
+- added option to set request URL , to access the dev backend/api
+
 # ecopiapi 0.2.7
 - added get_by_url() to get linked URL endpoints from other get functions
 

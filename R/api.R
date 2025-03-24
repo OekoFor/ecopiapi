@@ -33,18 +33,20 @@ ecopi_error_body <- function(resp) {
 #' }
 #' @import httr2
 #' @export
+ecopi_api <- function(resource, ...,
+                      params = list(),
+                      new_data = list(),
+                      file_path,
+                      base_url = getOption("ecopiapi.base_url", "https://api.ecopi.de/api/v0.2")) {
 
-
-ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_path) {
   params <- lapply(params, paste, collapse = ",")
   new_data <- lapply(new_data, function(x) if (identical(x, "")) jsonlite::unbox(NULL) else paste(x, collapse = ","))
 
-  # Check if both file_path and new_data are provided and give warning if so
   if (!missing(file_path) && length(unlist(new_data)) > 0) {
     warning("The 'new_data' parameter is ignored when 'file_path' is provided.")
   }
 
-  req <- request("https://api.ecopi.de/api/v0.2") |>
+  req <- request(base_url) |>
     req_headers(Authorization = paste("Token", get_ecopiapi_key())) |>
     req_user_agent("ecopiapi") |>
     req_error(body = ecopi_error_body) |>
@@ -52,14 +54,13 @@ ecopi_api <- function(resource, ..., params = list(), new_data = list(), file_pa
     req_url_query(!!!params)
 
   if (missing(file_path)) {
-    req <- req_body_json(req, new_data) # neu eungefügt, wichtig für PATCH Funktionen
+    req <- req_body_json(req, new_data)
     req_perform(req)
   } else {
     req <- req_body_multipart(req, image = curl::form_file(file_path))
     req_perform(req)
   }
 }
-
 
 
 #' Convert API Response Body to Data Frame
