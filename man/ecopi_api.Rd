@@ -4,7 +4,14 @@
 \alias{ecopi_api}
 \title{Make API requests to the Ecopi API}
 \usage{
-ecopi_api(resource, ..., params = list(), new_data = list(), file_path)
+ecopi_api(
+  resource,
+  ...,
+  params = list(),
+  new_data = list(),
+  file_path,
+  base_url = getOption("ecopiapi.base_url", "https://api.ecopi.de/api/v0.2")
+)
 }
 \arguments{
 \item{resource}{A character string specifying the API resource to request.}
