@@ -38,7 +38,6 @@ ecopi_api <- function(resource, ...,
                       new_data = list(),
                       file_path,
                       base_url = getOption("ecopiapi.base_url", "https://api.ecopi.de/api/v0.2")) {
-
   params <- lapply(params, paste, collapse = ",")
   new_data <- lapply(new_data, function(x) if (identical(x, "")) jsonlite::unbox(NULL) else paste(x, collapse = ","))
 
@@ -595,10 +594,8 @@ get_recorderspeciescounts <- function(project_name, include_validation_status = 
 get_recorders_count_detections <- function(project_name, ...) {
   params <- list(...)
   ecopi_api("GET /aggregations/project/{project_name}/recorders/count_detections",
-            project_name = project_name,
-            params = params
+    project_name = project_name,
+    params = params
   ) |>
     resp_body_json_to_df()
 }
-
-
