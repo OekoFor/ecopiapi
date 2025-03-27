@@ -20,12 +20,12 @@ Wrapper around the 'aggregations_project_recorders_count_detections' endpoint to
 \examples{
 # Retrieve a count pre species and recorders. By default, the count is returned for today
 \dontrun{
-get_recorders_count_detections(project_name = "039_zitro")
+get_recorders_count_detections(project_name = "pam_in_chemnitz")
 }
 # You can specify a start_date and end_date to get a count for specific time interval.
 # Limit 'countable' detections by setting a confidence threshold
 \dontrun{
-get_recorders_count_detections(project_name = "039_zitro", start_datetime = "2023-01-01", end_datetime = "2023-12-31", min_confidence = 0.85)
+get_recorders_count_detections(project_name = "pam_in_chemnitz", start_datetime = "2023-01-01", end_datetime = "2023-12-31", min_confidence = 0.85)
 }
 
 }
