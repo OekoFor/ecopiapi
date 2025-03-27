@@ -1,3 +1,6 @@
+# ecopiapi 0.2.9
+- aggregation endpoint url change adaption
+
 # ecopiapi 0.2.8
 - added option to set request URL , to access the dev backend/api
 
