@@ -1,3 +1,6 @@
+# ecopiapi 0.2.10
+- added aggregation endpoint - detection counts per recording .
+
 # ecopiapi 0.2.9
 - aggregation endpoint url change adaption
 
