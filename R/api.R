@@ -599,3 +599,31 @@ get_recorders_count_detections <- function(project_name, ...) {
   ) |>
     resp_body_json_to_df()
 }
+
+
+#' Get a count of detections per recorder grouped by rerecording.
+#'
+#' Wrapper around the 'aggregations_project_recorders_count_detections_project_recorder_recordings' endpoint to retrieve a count of detections for each recorder and grouped by recording.
+#'
+#' @param project_name Name of the project to get a count on detetcions class and recorder
+#' @param recorder_field_id Recorder field ID
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_aggregations_projects_recorders_recordings_count_detections_retrieve}
+#'
+#' @examples
+#' # Retrieve a count of detections for each ecoPi at each recording. (Project x , with 3 ecoPi'S is scheduled to record at 10 times per day. I want to extract a count of detections for each ecoPi and each scheduled recording session )
+#' \dontrun{
+#' get_recorders_count_detections_project_recorder_recordings(project_name = "pam_in_chemnitz",recorder_field_id = 1)
+#' }
+#'
+#' @return A summary containing species counts per recorder per recording within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_aggregations_projects_recorders_recordings_count_detections_retrieve}.
+#'
+#' @export
+get_recorders_count_detections_project_recorder_recordings <- function(project_name,recorder_field_id, ...) {
+  params <- list(...)
+  ecopi_api("GET /aggregations/projects/{project_name}/recorders/{recorder_field_id}/recordings/count_detections",
+            project_name = project_name,
+            recorder_field_id = recorder_field_id,
+            params = params
+  ) |>
+    resp_body_json_to_df()
+}
