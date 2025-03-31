@@ -19,6 +19,7 @@
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderlogs.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorders.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorders_count_detections.html</loc></url>
+<url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorders_count_detections_project_recorder_recordings.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderspeciescounts.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recorderstates.html</loc></url>
 <url><loc>https://oekofor.github.io/ecopiapi/reference/get_recordings.html</loc></url>
