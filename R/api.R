@@ -652,11 +652,8 @@ get_recorders_count_detections_project_recorder_recordings <- function(project_n
 get_aggregations_project_detections_count <- function(project_name, ...) {
   params <- list(...)
   ecopi_api("GET /aggregations/projects/{project_name}/detections_count",
-            project_name = project_name,
-            params = params
+    project_name = project_name,
+    params = params
   ) |>
     resp_body_json_to_df()
 }
-
-
-
