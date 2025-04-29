@@ -1,3 +1,6 @@
+# ecopiapi 0.2.11
+- added aggregations_project_detections_count, where you can also specify groups like recorder and species
+
 # ecopiapi 0.2.10
 - added aggregation endpoint - detection counts per recording .
 
