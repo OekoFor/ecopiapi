@@ -26,7 +26,7 @@ Wrapper around the 'aggregations_project_recorders_count_detections_project_reco
 \examples{
 # Retrieve a count of detections for each ecoPi at each recording. (Project x , with 3 ecoPi'S is scheduled to record at 10 times per day. I want to extract a count of detections for each ecoPi and each scheduled recording session )
 \dontrun{
-get_recorders_count_detections_project_recorder_recordings(project_name = "pam_in_chemnitz",recorder_field_id = 1)
+get_recorders_count_detections_project_recorder_recordings(project_name = "pam_in_chemnitz", recorder_field_id = 1)
 }
 
 }

@@ -627,3 +627,36 @@ get_recorders_count_detections_project_recorder_recordings <- function(project_n
   ) |>
     resp_body_json_to_df()
 }
+
+
+#' Get a count of detections per project by default and per group(s) if specified.
+#'
+#' Wrapper around the 'aggregations_project_detections_count' endpoint to retrieve a count of detections for each project and per group(s) if specified.
+#'
+#' @param project_name Name of the project to get a count on detetcions
+#' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.2/aggregations/projects/{project_name}/detections_count}
+#'
+#' @examples
+#' # Retrieve a count of detections for a specific project
+#' \dontrun{
+#' get_aggregations_project_detections_count(project_name = "pam_in_chemnitz")
+#' }
+#' # Retrieve a count of detections for a specific project per specified group(s), here in the example per recorder and species
+#' \dontrun{
+#' get_aggregations_project_detections_count(project_name = "pam_in_chemnitz", group_by = "recorder_field_id,scientific_name")
+#' }
+#'
+#' @return A list of meta information of the api request and a dataframe of the counts of detections for a specified project and per specified group (stored in the list "$result"): \url{https://api.ecopi.de/api/v0.2/aggregations/projects/{project_name}/detections_count}.
+#'
+#' @export
+get_aggregations_project_detections_count <- function(project_name, ...) {
+  params <- list(...)
+  ecopi_api("GET /aggregations/projects/{project_name}/detections_count",
+            project_name = project_name,
+            params = params
+  ) |>
+    resp_body_json_to_df()
+}
+
+
+
