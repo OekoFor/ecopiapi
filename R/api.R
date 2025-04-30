@@ -672,24 +672,23 @@ get_aggregations_project_detections_count <- function(project_name, ...) {
 #' @examples
 #' # Retrieve a count of detections for a every 5 minutes from recorder 1 in the PAM chemitz project. (default )
 #' \dontrun{
-#' get_aggregations_project_recorder_time_series(project_name = "pam_in_chemnitz", recorder_field_id =1,interval_unit ="minute", interval_size =5)
+#' get_aggregations_project_recorder_time_series(project_name = "pam_in_chemnitz", recorder_field_id = 1, interval_unit = "minute", interval_size = 5)
 #' }
 #'
-#' #$results
+#' # $results
 #    interval_start                    interval_end                           detections_count     sum_recorded_minutes   sum_coverage_ratio
 #    2025-04-24T10:53:00.000000+0000  2025-04-24T10:58:00.000000+0000                0             0.000000               0.0000000
 #    2025-04-24T10:58:00.000000+0000  2025-04-24T11:03:00.000000+0000                0             1.785117               0.3570233
 #'
-#'
 #' @return A list of meta information of the api request and a dataframe of the counts of detections for a specified project, recorder number and interval (stored in the list "$result"): \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_aggregations_projects_recorders_time_series_retrieve}.
 #'
 #' @export
-get_aggregations_project_recorder_time_series <- function(project_name,recorder_field_id, ...) {
+get_aggregations_project_recorder_time_series <- function(project_name, recorder_field_id, ...) {
   params <- list(...)
   ecopi_api("GET /aggregations/projects/{project_name}/recorders/{recorder_field_id}/time_series",
-            project_name = project_name,
-            recorder_field_id = recorder_field_id,
-            params = params
+    project_name = project_name,
+    recorder_field_id = recorder_field_id,
+    params = params
   ) |>
     resp_body_json_to_df()
 }
@@ -707,14 +706,13 @@ get_aggregations_project_recorder_time_series <- function(project_name,recorder_
 #' @examples
 #' # Retrieve a count of detections for a every 5 minutes in the PAM chemitz project.
 #' \dontrun{
-#' get_aggregations_project_time_series(project_name = "pam_in_chemnitz",interval_unit ="minute", interval_size =5)
+#' get_aggregations_project_time_series(project_name = "pam_in_chemnitz", interval_unit = "minute", interval_size = 5)
 #' }
 #'
-#' #$results
+#' # $results
 #    interval_start                    interval_end                           detections_count     sum_recorded_minutes   sum_coverage_ratio
 #    2025-04-24T10:53:00.000000+0000  2025-04-24T10:58:00.000000+0000                0             0.000000               0.0000000
 #    2025-04-24T10:58:00.000000+0000  2025-04-24T11:03:00.000000+0000                0             1.785117               0.3570233
-#'
 #'
 #' @return A list of meta information of the api request and a dataframe of the counts of detections for a specified project and interval (stored in the list "$result"): \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_aggregations_projects_recorders_time_series_retrieve}.
 #'
@@ -722,8 +720,8 @@ get_aggregations_project_recorder_time_series <- function(project_name,recorder_
 get_aggregations_project_time_series <- function(project_name, ...) {
   params <- list(...)
   ecopi_api("GET /aggregations/projects/{project_name}/time_series",
-            project_name = project_name,
-            params = params
+    project_name = project_name,
+    params = params
   ) |>
     resp_body_json_to_df()
 }
