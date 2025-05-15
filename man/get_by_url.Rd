@@ -4,13 +4,20 @@
 \alias{get_by_url}
 \title{Get data from a linked URL endpoint (mostly provided from other gtes)}
 \usage{
-get_by_url(full_url, base_url = "https://api.ecopi.de/api/v0.2")
+get_by_url(
+  full_url,
+  base_url = "https://api.ecopi.de/api/v0.2",
+  get_response = FALSE
+)
 }
 \arguments{
 \item{full_url}{URL of linked endpoint}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-Depends on the input. Mostly a data frame of the requested data.
+If get_response is FALSE (default), returns the data from the specified URL.
+If get_response is TRUE, returns a list with 'data' (the retrieved data) and 'response' (the original API response).
 }
 \description{
 Get data from a linked URL endpoint (mostly provided from other gtes)

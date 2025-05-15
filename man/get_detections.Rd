@@ -4,13 +4,16 @@
 \alias{get_detections}
 \title{Get detections list.}
 \usage{
-get_detections(...)
+get_detections(..., get_response = FALSE)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_list}}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A data.frame containing the detections that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_list}
+If get_response is FALSE (default), returns a data frame containing the detections.
+If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'detections_list' endpoint to retrieve a list of detections based on the specified query parameters.

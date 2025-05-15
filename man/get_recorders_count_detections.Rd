@@ -4,15 +4,18 @@
 \alias{get_recorders_count_detections}
 \title{Get a count of detections per recorder grouped by given parameters.}
 \usage{
-get_recorders_count_detections(project_name, ...)
+get_recorders_count_detections(project_name, ..., get_response = FALSE)
 }
 \arguments{
 \item{project_name}{Name of the project to get a count on detetcions class and recorder}
 
 \item{...}{query paramaters. See \url{http://192.168.10.30:8001/api/docs/#tag/v0.2/operation/v0.2_aggregations_project_recorder_recordings_count_detections_retrieve}}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A summary containing species counts per recorder within a project that match the specified query parameters: \url{http://192.168.10.30:8001/api/docs/#tag/v0.2/operation/v0.2_aggregations_project_recorder_recordings_count_detections_retrieve}.
+If get_response is FALSE (default), returns a summary containing species counts per recorder.
+If get_response is TRUE, returns a list with 'data' (the summary) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'aggregations_project_recorders_count_detections' endpoint to retrieve a count of detections for each recorder and grouped by the specified query parameters.

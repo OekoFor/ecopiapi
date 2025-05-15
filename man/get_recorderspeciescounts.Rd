@@ -4,7 +4,12 @@
 \alias{get_recorderspeciescounts}
 \title{Get a count of detections per species and recorder for a specific project.}
 \usage{
-get_recorderspeciescounts(project_name, include_validation_status = FALSE, ...)
+get_recorderspeciescounts(
+  project_name,
+  include_validation_status = FALSE,
+  ...,
+  get_response = FALSE
+)
 }
 \arguments{
 \item{project_name}{Name of the project to get a count on detetcions class and recorder}
@@ -12,9 +17,12 @@ get_recorderspeciescounts(project_name, include_validation_status = FALSE, ...)
 \item{include_validation_status}{Boolean to include validation status in the response}
 
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}.
+If get_response is FALSE (default), returns a summary containing species counts per recorder.
+If get_response is TRUE, returns a list with 'data' (the summary) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'meta_project_detections_recorderspeciescounts_retrieve' endpoint to retrieve a count of species detections for each recorder in a given project.

@@ -26,10 +26,9 @@ Wrapper around the 'aggregations_project_recorder_time_series' endpoint to retri
 \examples{
 # Retrieve a count of detections for a every 5 minutes from recorder 1 in the PAM chemitz project. (default )
 \dontrun{
-get_aggregations_project_recorder_time_series(project_name = "pam_in_chemnitz", recorder_field_id =1,interval_unit ="minute", interval_size =5)
+get_aggregations_project_recorder_time_series(project_name = "pam_in_chemnitz", recorder_field_id = 1, interval_unit = "minute", interval_size = 5)
 }
 
-#$results
-
+# $results
 
 }
