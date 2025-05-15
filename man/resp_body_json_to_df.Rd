@@ -4,13 +4,16 @@
 \alias{resp_body_json_to_df}
 \title{Convert API Response Body to Data Frame}
 \usage{
-resp_body_json_to_df(api_response)
+resp_body_json_to_df(api_response, get_response = FALSE)
 }
 \arguments{
 \item{api_response}{Response object from the API, expected to be of class \code{httr2_response}.}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A data frame containing the JSON content of the response body if it exists; otherwise, \code{NULL}.
+If get_response is FALSE (default), returns a data frame containing the JSON content of the response body if it exists; otherwise, \code{NULL}.
+If get_response is TRUE, returns a list with two elements: \code{data} (the data frame) and \code{response} (the original API response).
 }
 \description{
 This function takes an API response object and converts its JSON body to a data frame if the response contains a body. If the response does not contain a body, a warning is issued with the response status code.

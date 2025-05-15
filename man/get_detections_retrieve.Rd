@@ -4,13 +4,16 @@
 \alias{get_detections_retrieve}
 \title{Get detections retrieve.}
 \usage{
-get_detections_retrieve(id_or_uid)
+get_detections_retrieve(id_or_uid, get_response = FALSE)
 }
 \arguments{
 \item{id_or_uid}{The database ID or UID of the respective detection}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A list containing the detection that match the specified query parameters: \url{https://api.ecopi.de/api/v0.2/docsco/#operation/detections_list}
+If get_response is FALSE (default), returns a list containing the detection.
+If get_response is TRUE, returns a list with 'data' (the detection data) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'Retrieve Detections' endpoint to retrieve a single detection based on uid

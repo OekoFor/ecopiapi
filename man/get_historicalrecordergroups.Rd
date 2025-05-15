@@ -4,13 +4,16 @@
 \alias{get_historicalrecordergroups}
 \title{Get historical recorder groups list.}
 \usage{
-get_historicalrecordergroups(...)
+get_historicalrecordergroups(..., get_response = FALSE)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecordergroups_list}.}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A list containing the historical recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecordergroups_list}.
+If get_response is FALSE (default), returns a list containing the historical recorder groups.
+If get_response is TRUE, returns a list with 'data' (the historical recorder groups) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'historicalrecordergroups_list' endpoint to retrieve a list of recorder groups based on the specified query parameters.

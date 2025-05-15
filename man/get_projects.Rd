@@ -4,13 +4,16 @@
 \alias{get_projects}
 \title{Get projects list.}
 \usage{
-get_projects(...)
+get_projects(..., get_response = FALSE)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}.
+If get_response is FALSE (default), returns a data frame containing the projects.
+If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'projects_list' endpoint to retrieve a list of projects based on the specified query parameters.

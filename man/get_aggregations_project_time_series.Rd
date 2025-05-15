@@ -20,10 +20,9 @@ Wrapper around the 'aggregations_project_time_series' endpoint to retrieve a cou
 \examples{
 # Retrieve a count of detections for a every 5 minutes in the PAM chemitz project.
 \dontrun{
-get_aggregations_project_time_series(project_name = "pam_in_chemnitz",interval_unit ="minute", interval_size =5)
+get_aggregations_project_time_series(project_name = "pam_in_chemnitz", interval_unit = "minute", interval_size = 5)
 }
 
-#$results
-
+# $results
 
 }

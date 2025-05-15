@@ -4,13 +4,16 @@
 \alias{get_recorderstates}
 \title{Get recorder states list.}
 \usage{
-get_recorderstates(...)
+get_recorderstates(..., get_response = FALSE)
 }
 \arguments{
 \item{...}{query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorderstates_list}}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorderstates_list}.
+If get_response is FALSE (default), returns a data frame containing the recorder states.
+If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'recorderstates_list' endpoint to retrieve a list of recorder states based on the specified query parameters.

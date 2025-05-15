@@ -4,13 +4,16 @@
 \alias{get_project_info}
 \title{Get project info.}
 \usage{
-get_project_info(project_name)
+get_project_info(project_name, get_response = FALSE)
 }
 \arguments{
 \item{project_name}{Name of the project.}
+
+\item{get_response}{Logical. If TRUE, returns a list containing both the original response and the data frame.}
 }
 \value{
-A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}.
+If get_response is FALSE (default), returns a list containing information about the specified project.
+If get_response is TRUE, returns a list with 'data' (the project info) and 'response' (the original API response).
 }
 \description{
 Wrapper around the 'projects_retrieve' endpoint to retrieve information about a specific project.
