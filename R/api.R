@@ -67,8 +67,10 @@ ecopi_api <- function(resource, ...,
 #' This function takes an API response object and converts its JSON body to a data frame if the response contains a body. If the response does not contain a body, a warning is issued with the response status code.
 #'
 #' @param api_response Response object from the API, expected to be of class `httr2_response`.
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
-#' @return A data frame containing the JSON content of the response body if it exists; otherwise, `NULL`.
+#' @return If get_response is FALSE (default), returns a data frame containing the JSON content of the response body if it exists; otherwise, `NULL`.
+#'         If get_response is TRUE, returns a list with two elements: `data` (the data frame) and `response` (the original API response).
 #' @export
 #' @examplesIf interactive()
 #' response <- ecopi_api("GET /detections/", params = list("project" = "017_neeri"))
@@ -77,14 +79,24 @@ ecopi_api <- function(resource, ...,
 #' @importFrom httr2 resp_body_json
 #' @importFrom httr2 resp_status
 #' @importFrom httr2 resp_has_body
-resp_body_json_to_df <- function(api_response) {
+resp_body_json_to_df <- function(api_response, get_response = FALSE) {
   resp_body_not_empty <- resp_has_body(api_response)
   if (resp_body_not_empty) {
-    api_response |>
+    data <- api_response |>
       resp_body_json(simplifyVector = TRUE)
+
+    if (get_response) {
+      return(list(data = data, response = api_response))
+    } else {
+      return(data)
+    }
   } else {
     warning("The response does not contain a body. Status code: ", resp_status(api_response))
-    NULL
+    if (get_response) {
+      return(list(data = NULL, response = api_response))
+    } else {
+      return(NULL)
+    }
   }
 }
 
@@ -96,6 +108,7 @@ resp_body_json_to_df <- function(api_response) {
 #' Wrapper around the 'detections_list' endpoint to retrieve a list of detections based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_list}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a list of detections for project '017_neeri' that occurred in March (month=3)
@@ -103,13 +116,14 @@ resp_body_json_to_df <- function(api_response) {
 #' get_detections(project_name = "017_neeri", datetime__month = 3)
 #' }
 #'
-#' @return A data.frame containing the detections that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_detections_list}
+#' @return If get_response is FALSE (default), returns a data frame containing the detections.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_detections <- function(...) {
+get_detections <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /detections/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -118,17 +132,19 @@ get_detections <- function(...) {
 #' Wrapper around the 'Retrieve Detections' endpoint to retrieve a single detection based on uid
 #'
 #' @param id_or_uid The database ID or UID of the respective detection
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a single detection for a specific uid
 #' get_detections_retrieve(id_or_uid = "64733fbc-7cc8-49f6-adf1-c9ec2d676959")
 #'
-#' @return A list containing the detection that match the specified query parameters: \url{https://api.ecopi.de/api/v0.2/docsco/#operation/detections_list}
+#' @return If get_response is FALSE (default), returns a list containing the detection.
+#'         If get_response is TRUE, returns a list with 'data' (the detection data) and 'response' (the original API response).
 #'
 #' @export
-get_detections_retrieve <- function(id_or_uid) {
+get_detections_retrieve <- function(id_or_uid, get_response = FALSE) {
   ecopi_api("GET /detections/{id_or_uid}/", id_or_uid = id_or_uid) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -217,6 +233,7 @@ get_mediafile <- function(uid) {
 #' Wrapper around the 'recordings_list' endpoint to retrieve a dataframe of recordings based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recordings_list}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #'
 #' @examples
@@ -225,13 +242,14 @@ get_mediafile <- function(uid) {
 #' get_recordings(project_name = "017_neeri", datetime__month = 3)
 #' }
 #'
-#' @return A data.frame containing the recordings that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recordings_list}
+#' @return If get_response is FALSE (default), returns a data frame containing the recordings.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_recordings <- function(...) {
+get_recordings <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /recordings/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -243,6 +261,7 @@ get_recordings <- function(...) {
 #' Wrapper around the 'projects_list' endpoint to retrieve a list of projects based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # retrieve a dataframe of all projects
@@ -255,13 +274,14 @@ get_recordings <- function(...) {
 #' get_projects(project_name__in = "red_panda, green_banana")
 #' }
 #'
-#' @return A dataframe containing the projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}.
+#' @return If get_response is FALSE (default), returns a data frame containing the projects.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_projects <- function(...) {
+get_projects <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /projects/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -270,6 +290,7 @@ get_projects <- function(...) {
 #' Wrapper around the 'historicalprojects_list' endpoint to retrieve a list of historical projects based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalprojects_list}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # retrieve a dataframe of all historical projects
@@ -282,13 +303,14 @@ get_projects <- function(...) {
 #' get_historicalprojects(project_name__in = c("pam_in_chemnitz"))
 #' }
 #'
-#' @return A dataframe containing the historical projects that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalprojects_list}.
+#' @return If get_response is FALSE (default), returns a data frame containing the historical projects.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_historicalprojects <- function(...) {
+get_historicalprojects <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /historicalprojects/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -297,6 +319,7 @@ get_historicalprojects <- function(...) {
 #' Wrapper around the 'projects_retrieve' endpoint to retrieve information about a specific project.
 #'
 #' @param project_name Name of the project.
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve information about the '017_neeri' project
@@ -307,14 +330,15 @@ get_historicalprojects <- function(...) {
 #' @details
 #' This function retrieves information about a specific project, based on the project name provided in the 'project_name' parameter.
 #'
-#' @return A list containing information about the specified project: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_projects_list}.
+#' @return If get_response is FALSE (default), returns a list containing information about the specified project.
+#'         If get_response is TRUE, returns a list with 'data' (the project info) and 'response' (the original API response).
 #'
 #' @export
-get_project_info <- function(project_name) {
+get_project_info <- function(project_name, get_response = FALSE) {
   ecopi_api("GET /projects/{project_name}/",
     project_name = project_name
   ) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -327,6 +351,7 @@ get_project_info <- function(project_name) {
 #' This contains the configurations and species list
 #'
 #' @param ... query paramaters. Leave empty to get all recordergroups. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recordergroups_list}.
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a data frame of recorder groups for project 'oekofor'
@@ -334,13 +359,14 @@ get_project_info <- function(project_name) {
 #' get_recordergroups(project_name = "oekofor")
 #' }
 #'
-#' @return A list containing the recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recordergroups_list}.
+#' @return If get_response is FALSE (default), returns a list containing the recorder groups.
+#'         If get_response is TRUE, returns a list with 'data' (the recorder groups) and 'response' (the original API response).
 #'
 #' @export
-get_recordergroups <- function(...) {
+get_recordergroups <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /recordergroups/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -350,6 +376,7 @@ get_recordergroups <- function(...) {
 #' This contains the configurations and species list
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecordergroups_list}.
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a data frame of historical recorder groups for project 'oekofor'
@@ -357,13 +384,14 @@ get_recordergroups <- function(...) {
 #' get_historicalrecordergroups(project_name = "oekofor")
 #' }
 #'
-#' @return A list containing the historical recorder groups that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecordergroups_list}.
+#' @return If get_response is FALSE (default), returns a list containing the historical recorder groups.
+#'         If get_response is TRUE, returns a list with 'data' (the historical recorder groups) and 'response' (the original API response).
 #'
 #' @export
-get_historicalrecordergroups <- function(...) {
+get_historicalrecordergroups <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /historicalrecordergroups/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -375,6 +403,7 @@ get_historicalrecordergroups <- function(...) {
 #' Wrapper around the 'recorderlogs_list' endpoint to retrieve a list of recorder logs based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorderlogs_list}.
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #'
 #' @examples
@@ -383,13 +412,14 @@ get_historicalrecordergroups <- function(...) {
 #' get_recorderlogs(project_name = "pam_in_chemnitz")
 #' }
 #'
-#' @return A dataframe containing the recorder logs that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorderlogs_list}.
+#' @return If get_response is FALSE (default), returns a data frame containing the recorder logs.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_recorderlogs <- function(...) {
+get_recorderlogs <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /recorderlogs/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -400,6 +430,7 @@ get_recorderlogs <- function(...) {
 #' Wrapper around the 'recorders_list' endpoint to retrieve a list of recorders based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorders_list}.
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a list of recorders for project '017_neeri'
@@ -407,13 +438,14 @@ get_recorderlogs <- function(...) {
 #' get_recorders(project_name = "017_neerach_ried")
 #' }
 #'
-#' @return A dataframe containing the recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorders_list}.
+#' @return If get_response is FALSE (default), returns a data frame containing the recorders.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_recorders <- function(...) {
+get_recorders <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /recorders/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -422,6 +454,7 @@ get_recorders <- function(...) {
 #' Wrapper around the 'historicalrecorders_list' endpoint to get a list of recorders based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecorders_list}.
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a list of historical recorders for project '017_neeri'
@@ -429,13 +462,14 @@ get_recorders <- function(...) {
 #' get_historicalrecorders(project_name = "pam_in_chemnitz")
 #' }
 #'
-#' @return A dataframe containing the historical recorders that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_historicalrecorders_list}.
+#' @return If get_response is FALSE (default), returns a data frame containing the historical recorders.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_historicalrecorders <- function(...) {
+get_historicalrecorders <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /historicalrecorders/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -475,6 +509,7 @@ patch_recorders <- function(..., recorder_name, file_path) {
 #' Wrapper around the 'recorderstates_list' endpoint to retrieve a list of recorder states based on the specified query parameters.
 #'
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorderstates_list}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve all recorder states
@@ -487,19 +522,21 @@ patch_recorders <- function(..., recorder_name, file_path) {
 #' get_recorderstates(recorder_name = "00000000d76d0bf9")
 #' }
 #'
-#' @return A dataframe containing the recorder states that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorderstates_list}.
+#' @return If get_response is FALSE (default), returns a data frame containing the recorder states.
+#'         If get_response is TRUE, returns a list with 'data' (the data frame) and 'response' (the original API response).
 #'
 #' @export
-get_recorderstates <- function(...) {
+get_recorderstates <- function(..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /recorderstates/", params = params) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
 #' Get data from a linked URL endpoint (mostly provided from other gtes)
 #'
 #' @param full_url URL of linked endpoint
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a ecopiapp release from a linked URL
@@ -507,10 +544,11 @@ get_recorderstates <- function(...) {
 #' get_by_url("https://api.ecopi.de/api/v0.2/releases/69/")
 #' }
 #'
-#' @return Depends on the input. Mostly a data frame of the requested data.
+#' @return If get_response is FALSE (default), returns the data from the specified URL.
+#'         If get_response is TRUE, returns a list with 'data' (the retrieved data) and 'response' (the original API response).
 #'
 #' @export
-get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2") {
+get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2", get_response = FALSE) {
   if (is.na(full_url) || !nzchar(full_url)) {
     warning("Empty or NA URL provided.")
     return(NULL)
@@ -523,7 +561,7 @@ get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2") {
 
   tryCatch(
     {
-      ecopi_api(api_path) |> resp_body_json_to_df()
+      ecopi_api(api_path) |> resp_body_json_to_df(get_response = get_response)
     },
     error = function(e) {
       warning(sprintf("Failed to fetch data from %s: %s", full_url, e$message))
@@ -542,6 +580,7 @@ get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2") {
 #' @param project_name Name of the project to get a count on detetcions class and recorder
 #' @param include_validation_status Boolean to include validation status in the response
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a count pre species and recorders. By default, the count is returned for today
@@ -554,10 +593,11 @@ get_by_url <- function(full_url, base_url = "https://api.ecopi.de/api/v0.2") {
 #' get_recorderspeciescounts(project_name = "pam_in_chemnitz", start_date = "2023-01-01", end_date = "2023-12-31", min_confidence = 0.85)
 #' }
 #'
-#' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_meta_project_detections_recorderspeciescounts_retrieve}.
+#' @return If get_response is FALSE (default), returns a summary containing species counts per recorder.
+#'         If get_response is TRUE, returns a list with 'data' (the summary) and 'response' (the original API response).
 #'
 #' @export
-get_recorderspeciescounts <- function(project_name, include_validation_status = FALSE, ...) {
+get_recorderspeciescounts <- function(project_name, include_validation_status = FALSE, ..., get_response = FALSE) {
   params <- list(...)
   if (include_validation_status) {
     params$include_validation_status <- "true"
@@ -566,7 +606,7 @@ get_recorderspeciescounts <- function(project_name, include_validation_status = 
     project_name = project_name,
     params = params
   ) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -576,6 +616,7 @@ get_recorderspeciescounts <- function(project_name, include_validation_status = 
 #'
 #' @param project_name Name of the project to get a count on detetcions class and recorder
 #' @param ... query paramaters. See \url{http://192.168.10.30:8001/api/docs/#tag/v0.2/operation/v0.2_aggregations_project_recorder_recordings_count_detections_retrieve}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a count pre species and recorders. By default, the count is returned for today
@@ -588,16 +629,17 @@ get_recorderspeciescounts <- function(project_name, include_validation_status = 
 #' get_recorders_count_detections(project_name = "pam_in_chemnitz", start_datetime = "2023-01-01", end_datetime = "2023-12-31", min_confidence = 0.85)
 #' }
 #'
-#' @return A summary containing species counts per recorder within a project that match the specified query parameters: \url{http://192.168.10.30:8001/api/docs/#tag/v0.2/operation/v0.2_aggregations_project_recorder_recordings_count_detections_retrieve}.
+#' @return If get_response is FALSE (default), returns a summary containing species counts per recorder.
+#'         If get_response is TRUE, returns a list with 'data' (the summary) and 'response' (the original API response).
 #'
 #' @export
-get_recorders_count_detections <- function(project_name, ...) {
+get_recorders_count_detections <- function(project_name, ..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /aggregations/projects/{project_name}/recorders/count_detections",
     project_name = project_name,
     params = params
   ) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -608,6 +650,7 @@ get_recorders_count_detections <- function(project_name, ...) {
 #' @param project_name Name of the project to get a count on detetcions class and recorder
 #' @param recorder_field_id Recorder field ID
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_aggregations_projects_recorders_recordings_count_detections_retrieve}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a count of detections for each ecoPi at each recording. (Project x , with 3 ecoPi'S is scheduled to record at 10 times per day. I want to extract a count of detections for each ecoPi and each scheduled recording session )
@@ -615,17 +658,18 @@ get_recorders_count_detections <- function(project_name, ...) {
 #' get_recorders_count_detections_project_recorder_recordings(project_name = "pam_in_chemnitz", recorder_field_id = 1)
 #' }
 #'
-#' @return A summary containing species counts per recorder per recording within a project that match the specified query parameters: \url{https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_aggregations_projects_recorders_recordings_count_detections_retrieve}.
+#' @return If get_response is FALSE (default), returns a summary containing species counts per recorder per recording.
+#'         If get_response is TRUE, returns a list with 'data' (the summary) and 'response' (the original API response).
 #'
 #' @export
-get_recorders_count_detections_project_recorder_recordings <- function(project_name, recorder_field_id, ...) {
+get_recorders_count_detections_project_recorder_recordings <- function(project_name, recorder_field_id, ..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /aggregations/projects/{project_name}/recorders/{recorder_field_id}/recordings/count_detections",
     project_name = project_name,
     recorder_field_id = recorder_field_id,
     params = params
   ) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
 
 
@@ -635,6 +679,7 @@ get_recorders_count_detections_project_recorder_recordings <- function(project_n
 #'
 #' @param project_name Name of the project to get a count on detetcions
 #' @param ... query paramaters. See \url{https://api.ecopi.de/api/v0.2/aggregations/projects/{project_name}/detections_count}
+#' @param get_response Logical. If TRUE, returns a list containing both the original response and the data frame.
 #'
 #' @examples
 #' # Retrieve a count of detections for a specific project
@@ -646,14 +691,15 @@ get_recorders_count_detections_project_recorder_recordings <- function(project_n
 #' get_aggregations_project_detections_count(project_name = "pam_in_chemnitz", group_by = "recorder_field_id,scientific_name")
 #' }
 #'
-#' @return A list of meta information of the api request and a dataframe of the counts of detections for a specified project and per specified group (stored in the list "$result"): \url{https://api.ecopi.de/api/v0.2/aggregations/projects/{project_name}/detections_count}.
+#' @return If get_response is FALSE (default), returns a list of meta information and a dataframe of the counts of detections.
+#'         If get_response is TRUE, returns a list with 'data' (the counts information) and 'response' (the original API response).
 #'
 #' @export
-get_aggregations_project_detections_count <- function(project_name, ...) {
+get_aggregations_project_detections_count <- function(project_name, ..., get_response = FALSE) {
   params <- list(...)
   ecopi_api("GET /aggregations/projects/{project_name}/detections_count",
     project_name = project_name,
     params = params
   ) |>
-    resp_body_json_to_df()
+    resp_body_json_to_df(get_response = get_response)
 }
