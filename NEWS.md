@@ -1,3 +1,6 @@
+# ecopiapi 0.3.1
+- added get_response argument to resp_body_json_to_df() and all get_* functions in order to be able to return the raw response from the API
+
 # ecopiapi 0.3.0
  - get_aggregations_project_time_series
  -get_aggregations_project_recorder_time_series
