@@ -1,3 +1,7 @@
+# ecopiapi 0.3.0
+ - get_aggregations_project_time_series
+ -get_aggregations_project_recorder_time_series
+
 # ecopiapi 0.2.11
 - added aggregations_project_detections_count, where you can also specify groups like recorder and species
 

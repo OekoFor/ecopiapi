@@ -3,6 +3,8 @@
 export(ecopi_api)
 export(ecopi_error_body)
 export(get_aggregations_project_detections_count)
+export(get_aggregations_project_recorder_time_series)
+export(get_aggregations_project_time_series)
 export(get_by_url)
 export(get_detections)
 export(get_detections_retrieve)
