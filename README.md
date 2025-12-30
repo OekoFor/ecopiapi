@@ -3,11 +3,8 @@
 
 # ecopiapi
 
-<!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-<!-- badges: end -->
+> [!NOTE]
+> This repository/ R-Package will soon be replace by the RClient repository/ R-Package!
 
 The goal of ecopiapi is to Get, post, patch data from the ecop API.
 
