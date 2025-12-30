@@ -1,0 +1,37 @@
+# Get recorders list.
+
+Wrapper around the 'recorders_list' endpoint to retrieve a list of
+recorders based on the specified query parameters.
+
+## Usage
+
+``` r
+get_recorders(..., get_response = FALSE)
+```
+
+## Arguments
+
+- ...:
+
+  query paramaters. See
+  <https://api.ecopi.de/api/docs/#tag/v0.2/operation/v0.2_recorders_list>.
+
+- get_response:
+
+  Logical. If TRUE, returns a list containing both the original response
+  and the data frame.
+
+## Value
+
+If get_response is FALSE (default), returns a data frame containing the
+recorders. If get_response is TRUE, returns a list with 'data' (the data
+frame) and 'response' (the original API response).
+
+## Examples
+
+``` r
+# Retrieve a list of recorders for project '017_neeri'
+if (FALSE) { # \dontrun{
+get_recorders(project_name = "017_neerach_ried")
+} # }
+```
